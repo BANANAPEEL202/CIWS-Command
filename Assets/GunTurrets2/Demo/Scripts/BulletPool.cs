@@ -5,12 +5,15 @@ public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private int poolSize = 10; // Size of the pool
+    [SerializeField] private float despawnDistance = 100f; // Max distance before despawning
 
     private Queue<GameObject> pool;
+    private List<GameObject> activeBullets; // List to track active bullets
 
     private void Awake()
     {
         pool = new Queue<GameObject>();
+        activeBullets = new List<GameObject>();
 
         // Pre-fill the pool with bullet objects
         for (int i = 0; i < poolSize; i++)
@@ -18,6 +21,20 @@ public class BulletPool : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.SetActive(false); // Initially, all bullets are inactive
             pool.Enqueue(bullet);
+        }
+    }
+
+    private void Update()
+    {
+        // Periodically check for bullets that are too far from the origin
+        for (int i = activeBullets.Count - 1; i >= 0; i--)
+        {
+            GameObject bullet = activeBullets[i];
+            if (bullet.activeSelf && Vector3.Distance(bullet.transform.position, Vector3.zero) > despawnDistance)
+            {
+                ReturnBullet(bullet);
+                activeBullets.RemoveAt(i);
+            }
         }
     }
 
@@ -40,6 +57,7 @@ public class BulletPool : MonoBehaviour
                 rb.linearVelocity = Vector3.zero;  // Reset velocity to zero
                 rb.angularVelocity = Vector3.zero;
             }
+            activeBullets.Add(bullet); // Add the bullet to the active list
             return bullet;
         }
 

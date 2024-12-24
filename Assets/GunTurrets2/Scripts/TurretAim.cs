@@ -14,7 +14,7 @@ namespace GT2
 
         [Header("Elevation")]
         [Tooltip("Speed at which the turret's guns elevate up and down.")]
-        public float ElevationSpeed = 30f;
+        public float ElevationSpeed = 92f;
 
         [Tooltip("Highest upwards elevation the turret's barrels can aim.")]
         public float MaxElevation = 60f;
@@ -25,7 +25,7 @@ namespace GT2
         [Header("Traverse")]
 
         [Tooltip("Speed at which the turret can rotate left/right.")]
-        public float TraverseSpeed = 60f;
+        public float TraverseSpeed = 126f;
 
         [Tooltip("When true, the turret can only rotate horizontally with the given limits.")]
         [SerializeField] private bool hasLimitedTraverse = false;
@@ -47,7 +47,7 @@ namespace GT2
 
         [Header("Debug")]
         public bool DrawDebugRay = true;
-        public bool DrawDebugArcs = false;
+        public bool DrawDebugArcs = true;
 
         private float angleToTarget = 0f;
         private float elevation = 0f;

@@ -112,48 +112,48 @@ namespace GT2.Demo
         private Vector3 PredictTargetPosition()
         {
             if (targetPoint == null || targetRigidbody == null)
-        return firePoint.position;
+                return firePoint.position;
 
-    Vector3 targetPosition = targetPoint.position;
-    Vector3 targetVelocity = targetRigidbody.linearVelocity;
-    Vector3 firePointPosition = firePoint.position;
+            Vector3 targetPosition = targetPoint.position;
+            Vector3 targetVelocity = targetRigidbody.linearVelocity;
+            Vector3 firePointPosition = firePoint.position;
 
-    // Calculate the vector from the firePoint to the target
-    Vector3 toTarget = targetPosition - firePointPosition;
+            // Calculate the vector from the firePoint to the target
+            Vector3 toTarget = targetPosition - firePointPosition;
 
-    // Calculate the quadratic coefficients for time to intercept
-    float a = targetVelocity.sqrMagnitude - projectileSpeed * projectileSpeed;
-    float b = 2 * Vector3.Dot(toTarget, targetVelocity);
-    float c = toTarget.sqrMagnitude;
+            // Calculate the quadratic coefficients for time to intercept
+            float a = targetVelocity.sqrMagnitude - projectileSpeed * projectileSpeed;
+            float b = 2 * Vector3.Dot(toTarget, targetVelocity);
+            float c = toTarget.sqrMagnitude;
 
-    // Compute the discriminant of the quadratic equation
-    float discriminant = b * b - 4 * a * c;
+            // Compute the discriminant of the quadratic equation
+            float discriminant = b * b - 4 * a * c;
 
-    if (discriminant < 0 || Mathf.Abs(a) < 0.001f) // No real solution or target is stationary
-    {
-        // If there's no real solution, just return the target's current position
-        return targetPosition;
-    }
+            if (discriminant < 0 || Mathf.Abs(a) < 0.001f) // No real solution or target is stationary
+            {
+                // If there's no real solution, just return the target's current position
+                return targetPosition;
+            }
 
-    // Calculate the two possible solutions for time to intercept
-    float sqrtDiscriminant = Mathf.Sqrt(discriminant);
-    float t1 = (-b - sqrtDiscriminant) / (2 * a);
-    float t2 = (-b + sqrtDiscriminant) / (2 * a);
-    // Use the smallest positive time to ensure the projectile intercepts
-    // Ensure both t1 and t2 are positive before selecting the smallest one
-    float t = Mathf.Infinity; // Start with a large value for t (to find the smallest positive t)
+            // Calculate the two possible solutions for time to intercept
+            float sqrtDiscriminant = Mathf.Sqrt(discriminant);
+            float t1 = (-b - sqrtDiscriminant) / (2 * a);
+            float t2 = (-b + sqrtDiscriminant) / (2 * a);
+            // Use the smallest positive time to ensure the projectile intercepts
+            // Ensure both t1 and t2 are positive before selecting the smallest one
+            float t = Mathf.Infinity; // Start with a large value for t (to find the smallest positive t)
 
-    if (t1 > 0) t = Mathf.Min(t, t1); // Use t1 if it's positive
-    if (t2 > 0) t = Mathf.Min(t, t2); // Use t2 if it's positive
+            if (t1 > 0) t = Mathf.Min(t, t1); // Use t1 if it's positive
+            if (t2 > 0) t = Mathf.Min(t, t2); // Use t2 if it's positive
 
-    // If t is still Infinity, there was no valid positive time (return target position)
-    if (t == Mathf.Infinity)
-    {
-        return targetPosition;
-    }
-    Debug.Log("t: " + t);
-    // Predict the target's future position based on its velocity and time to intercept
-    return targetPosition + targetVelocity * t;
+            // If t is still Infinity, there was no valid positive time (return target position)
+            if (t == Mathf.Infinity)
+            {
+                return targetPosition;
+            }
+
+            // Predict the target's future position based on its velocity and time to intercept
+            return targetPosition + targetVelocity * t;
         }
 
     }

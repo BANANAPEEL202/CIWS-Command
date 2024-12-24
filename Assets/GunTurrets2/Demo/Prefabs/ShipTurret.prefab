@@ -284,7 +284,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurretAim: {fileID: 114982388926508418}
-  TargetPoint: {fileID: 0}
+  firePoint: {fileID: 0}
+  Bullet: {fileID: 0}
+  fireRate: 1
+  projectileSpeed: 20
+  bulletPool: {fileID: 0}
+  targetPoint: {fileID: 0}
 --- !u!114 &114982388926508418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,10 +304,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretBase: {fileID: 4895007756683194}
   barrels: {fileID: 4680512823758982}
-  ElevationSpeed: 30
+  ElevationSpeed: 92
   MaxElevation: 60
   MaxDepression: 5
-  TraverseSpeed: 60
+  TraverseSpeed: 126
   hasLimitedTraverse: 1
   LeftLimit: 140
   RightLimit: 140
