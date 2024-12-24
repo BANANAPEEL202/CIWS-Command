@@ -10,7 +10,6 @@ namespace GT2.Demo
         [SerializeField] private GameObject Bullet = null; // Projectile prefab
         [SerializeField] private float fireRate = 1f; // Fire rate in shots per second
         [SerializeField] private float projectileSpeed = 20f; // Speed of the projectile
-        [SerializeField] private Transform Barrel = null; // Reference to the barrel's transform
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
@@ -29,22 +28,17 @@ namespace GT2.Demo
         {
             if (TurretAim == null || Bullet == null)
                 return;
-
-            FindTarget();
-            if (targetPoint == null) {
-                TurretAim.IsIdle = targetPoint == null;
+            if (Input.GetMouseButtonDown(0)) {
+                TurretAim.IsIdle = !TurretAim.IsIdle;
             }
-            else {
-
+            if (TurretAim.IsIdle)
+                return;
+            FindTarget();
+            if (targetPoint != null) {
                 Vector3 predictedPosition = PredictTargetPosition();
                 TurretAim.AimPosition = predictedPosition;
 
-                // Check if the turret is aimed correctly at the predicted target position
-                float aimAccuracy = 5f; // The maximum acceptable angle for firing (in degrees)
-                Vector3 directionToTarget = predictedPosition - firePoint.position;
-                float angle = Vector3.Angle(Barrel.forward, directionToTarget);
-
-                if (angle <= aimAccuracy)
+                if (TurretAim.IsAimed)
                 {
                     // Attempt to shoot at the target
                     fireCooldown -= Time.deltaTime;
@@ -54,12 +48,14 @@ namespace GT2.Demo
                         fireCooldown = 1f / fireRate; // Reset cooldown
                     }
                 }
-                    }
+            }
+            else {
+                // Reset aim position
+                TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
+            }
 
 
-                    if (Input.GetMouseButtonDown(0)) {
-                        TurretAim.IsIdle = !TurretAim.IsIdle;
-                    }
+                    
         }
 
         private void FindTarget()
