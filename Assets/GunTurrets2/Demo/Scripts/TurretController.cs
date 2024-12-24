@@ -30,6 +30,7 @@ namespace GT2.Demo
             if (soundController == null)
                 Debug.LogError(name + ": CIWSSoundController script is missing on the same GameObject!");
         }
+        
 
         private void Update()
         {
@@ -39,8 +40,10 @@ namespace GT2.Demo
                 Debug.LogError(name + ": TurretController not assigned a BulletPool!");
                 return;
             }
-            if (soundController == null)
+            if (soundController == null) {
+                Debug.LogError(name + ": TurretController not assigned a SoundController!");
                 soundController = GetComponent<SoundController>();
+            }
             
             if (Input.GetMouseButtonDown(0)) {
                 TurretAim.IsIdle = !TurretAim.IsIdle;
