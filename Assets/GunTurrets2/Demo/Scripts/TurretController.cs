@@ -11,6 +11,7 @@ namespace GT2.Demo
         [SerializeField] private float fireRate = 1f; // Fire rate in shots per second
         [SerializeField] private float projectileSpeed = 50f; // Speed of the projectile
         [SerializeField] private BulletPool bulletPool = null; // Reference to the BulletPool
+        [SerializeField] private float maxEngagementRange = 300f; // Maximum range to engage targets
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
@@ -48,8 +49,10 @@ namespace GT2.Demo
             if (Input.GetMouseButtonDown(0)) {
                 TurretAim.IsIdle = !TurretAim.IsIdle;
             }
-            if (TurretAim.IsIdle)
+            if (TurretAim.IsIdle) {
+                StopFiringSound();
                 return;
+            }
             FindTarget();
             if (targetPoint != null) {
                 Vector3 predictedPosition = PredictTargetPosition();
@@ -102,7 +105,7 @@ namespace GT2.Demo
                 float angleToTarget = Vector3.SignedAngle(transform.forward, flattenedDirection, transform.up);
 
                 // Check if the target is within the traverse range
-                if (distance < closestDistance && Mathf.Abs(angleToTarget) <= TurretAim.RightLimit && Mathf.Abs(angleToTarget) >= -TurretAim.LeftLimit)
+                if (distance < maxEngagementRange && distance < closestDistance && Mathf.Abs(angleToTarget) <= TurretAim.RightLimit && Mathf.Abs(angleToTarget) >= -TurretAim.LeftLimit)
                 {
                     closestDistance = distance;
                     closestTarget = missile.transform;
