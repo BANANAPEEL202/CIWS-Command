@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GT2.Demo
 {
@@ -21,6 +22,8 @@ namespace GT2.Demo
             if (TurretAim == null)
                 return;
 
+            FindTarget();
+
             if (TargetPoint == null)
                 TurretAim.IsIdle = TargetPoint == null;
             else
@@ -28,6 +31,24 @@ namespace GT2.Demo
 
             if (Input.GetMouseButtonDown(0))
                 TurretAim.IsIdle = !TurretAim.IsIdle;
+        }
+
+        private void FindTarget()
+        {
+            GameObject[] missiles = GameObject.FindGameObjectsWithTag("Missile");
+            float closestDistance = float.MaxValue;
+            Transform closestTarget = null;
+
+            foreach (GameObject missile in missiles)
+            {
+                float distance = Vector3.Distance(transform.position, missile.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestTarget = missile.transform;
+                }
+            }
+            TargetPoint = closestTarget;
         }
     }
 }
