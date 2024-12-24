@@ -23,6 +23,22 @@ public class BulletPool : MonoBehaviour
             pool.Enqueue(bullet);
         }
     }
+    
+    private void OnEnable()
+    {
+        if (pool == null)
+        {
+            pool = new Queue<GameObject>();
+            activeBullets = new List<GameObject>();
+
+            for (int i = 0; i < poolSize; i++)
+            {
+                GameObject bullet = Instantiate(bulletPrefab);
+                bullet.SetActive(false);
+                pool.Enqueue(bullet);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -41,6 +57,11 @@ public class BulletPool : MonoBehaviour
     // Get a bullet from the pool
     public GameObject GetBullet()
     {
+        if (pool == null)
+        {
+            Debug.LogError("Bullet pool not initialized!");
+            return null;
+        }
         if (pool.Count > 0)
         {
             GameObject bullet = pool.Dequeue();
