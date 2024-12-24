@@ -14,8 +14,10 @@ namespace GT2.Demo
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
+        private SoundController soundController; // Reference to the Sound Controller
         
         private float fireCooldown = 0f;
+        private bool isShooting = false; // Tracks whether the turret is actively shooting
 
         private void Awake()
         {
@@ -23,12 +25,23 @@ namespace GT2.Demo
                 Debug.LogError(name + ": TurretController not assigned a TurretAim!");
             if (Bullet == null)
                 Debug.LogError(name + ": TurretController not assigned a projectile prefab!");
+            // Automatically find the CIWSSoundController on the same GameObject
+            soundController = GetComponent<SoundController>();
+            if (soundController == null)
+                Debug.LogError(name + ": CIWSSoundController script is missing on the same GameObject!");
         }
 
         private void Update()
         {
             if (TurretAim == null || Bullet == null)
                 return;
+            if (bulletPool == null){
+                Debug.LogError(name + ": TurretController not assigned a BulletPool!");
+                return;
+            }
+            if (soundController == null)
+                soundController = GetComponent<SoundController>();
+            
             if (Input.GetMouseButtonDown(0)) {
                 TurretAim.IsIdle = !TurretAim.IsIdle;
             }
@@ -47,12 +60,22 @@ namespace GT2.Demo
                     {
                         Shoot();
                         fireCooldown = 1f / fireRate; // Reset cooldown
+                        // Play the firing sound while actively shooting
+                        if (!isShooting)
+                        {
+                            StartFiringSound();
+                        }
                     }
                 }
+                else{
+                    StopFiringSound();
+                }
+                    
             }
             else {
                 // Reset aim position
                 TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
+                StopFiringSound();
             }
 
 
@@ -157,5 +180,24 @@ namespace GT2.Demo
             return targetPosition + targetVelocity * t;
         }
 
+        private void StartFiringSound()
+        {
+            if (soundController != null)
+            {
+                soundController.StartFiring();
+                isShooting = true;
+            }
+        }
+
+        private void StopFiringSound()
+        {
+            if (soundController != null)
+            {
+                soundController.StopFiring();
+                isShooting = false;
+            }
+        }
+
     }
+    
 }
