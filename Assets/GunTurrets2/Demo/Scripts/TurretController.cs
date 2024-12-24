@@ -107,6 +107,7 @@ namespace GT2.Demo
                 Vector3 direction = (TurretAim.AimPosition - firePoint.position).normalized;
                 rb.linearVelocity = direction * projectileSpeed; // Set the velocity
             }
+
         }
 
         private Vector3 PredictTargetPosition()
