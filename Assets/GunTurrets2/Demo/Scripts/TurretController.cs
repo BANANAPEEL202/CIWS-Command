@@ -9,11 +9,12 @@ namespace GT2.Demo
         [SerializeField] private Transform firePoint = null; // Firing point
         [SerializeField] private GameObject Bullet = null; // Projectile prefab
         [SerializeField] private float fireRate = 1f; // Fire rate in shots per second
-        [SerializeField] private float projectileSpeed = 20f; // Speed of the projectile
+        [SerializeField] private float projectileSpeed = 50f; // Speed of the projectile
+        [SerializeField] private BulletPool bulletPool = null; // Reference to the BulletPool
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
-
+        
         private float fireCooldown = 0f;
 
         private void Awake()
@@ -91,44 +92,68 @@ namespace GT2.Demo
             if (targetPoint == null || TurretAim.IsIdle)
                 return;
 
-            // Instantiate a projectile and set its initial velocity toward the target
-            GameObject projectile = Instantiate(Bullet, firePoint.position, firePoint.rotation);
+            GameObject projectile = bulletPool.GetBullet();
+            if (projectile == null) {
+                return;
+            }
+
+            // Set its position and velocity
+            projectile.transform.position = firePoint.position;
+            projectile.transform.rotation = firePoint.rotation;
+
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 Vector3 direction = (TurretAim.AimPosition - firePoint.position).normalized;
-                rb.linearVelocity = direction * projectileSpeed;
+                rb.linearVelocity = direction * projectileSpeed; // Set the velocity
             }
         }
 
         private Vector3 PredictTargetPosition()
         {
             if (targetPoint == null || targetRigidbody == null)
-                return firePoint.position;
+        return firePoint.position;
 
-            Vector3 targetPosition = targetPoint.position;
-            Vector3 targetVelocity = targetRigidbody.linearVelocity;
-            Vector3 firePointPosition = firePoint.position;
+    Vector3 targetPosition = targetPoint.position;
+    Vector3 targetVelocity = targetRigidbody.linearVelocity;
+    Vector3 firePointPosition = firePoint.position;
 
-            // Calculate time to intercept
-            Vector3 toTarget = targetPosition - firePointPosition;
-            float a = targetVelocity.sqrMagnitude - projectileSpeed * projectileSpeed;
-            float b = 2 * Vector3.Dot(toTarget, targetVelocity);
-            float c = toTarget.sqrMagnitude;
-            float discriminant = b * b - 4 * a * c;
+    // Calculate the vector from the firePoint to the target
+    Vector3 toTarget = targetPosition - firePointPosition;
 
-            if (discriminant < 0 || Mathf.Abs(a) < 0.001f) // No real solution or target stationary
-                return targetPosition;
+    // Calculate the quadratic coefficients for time to intercept
+    float a = targetVelocity.sqrMagnitude - projectileSpeed * projectileSpeed;
+    float b = 2 * Vector3.Dot(toTarget, targetVelocity);
+    float c = toTarget.sqrMagnitude;
 
-            float sqrtDiscriminant = Mathf.Sqrt(discriminant);
-            float t1 = (-b - sqrtDiscriminant) / (2 * a);
-            float t2 = (-b + sqrtDiscriminant) / (2 * a);
+    // Compute the discriminant of the quadratic equation
+    float discriminant = b * b - 4 * a * c;
 
-            // Use the smallest positive time
-            float t = Mathf.Max(0, Mathf.Min(t1, t2));
+    if (discriminant < 0 || Mathf.Abs(a) < 0.001f) // No real solution or target is stationary
+    {
+        // If there's no real solution, just return the target's current position
+        return targetPosition;
+    }
 
-            // Predict future position
-            return targetPosition + targetVelocity * t;
+    // Calculate the two possible solutions for time to intercept
+    float sqrtDiscriminant = Mathf.Sqrt(discriminant);
+    float t1 = (-b - sqrtDiscriminant) / (2 * a);
+    float t2 = (-b + sqrtDiscriminant) / (2 * a);
+    // Use the smallest positive time to ensure the projectile intercepts
+    // Ensure both t1 and t2 are positive before selecting the smallest one
+    float t = Mathf.Infinity; // Start with a large value for t (to find the smallest positive t)
+
+    if (t1 > 0) t = Mathf.Min(t, t1); // Use t1 if it's positive
+    if (t2 > 0) t = Mathf.Min(t, t2); // Use t2 if it's positive
+
+    // If t is still Infinity, there was no valid positive time (return target position)
+    if (t == Mathf.Infinity)
+    {
+        return targetPosition;
+    }
+    Debug.Log("t: " + t);
+    // Predict the target's future position based on its velocity and time to intercept
+    return targetPosition + targetVelocity * t;
         }
 
     }
