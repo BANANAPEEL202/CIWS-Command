@@ -71,13 +71,6 @@ public class BulletPool : MonoBehaviour
                 return null;
             }
             bullet.SetActive(true); // Activate the bullet when it's taken from the pool
-            bullet.transform.rotation = Quaternion.identity;
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;  // Reset velocity to zero
-                rb.angularVelocity = Vector3.zero;
-            }
             activeBullets.Add(bullet); // Add the bullet to the active list
             return bullet;
         }
@@ -92,6 +85,13 @@ public class BulletPool : MonoBehaviour
     public void ReturnBullet(GameObject bullet)
     {
         bullet.SetActive(false); // Deactivate the bullet before returning it to the pool
+        bullet.transform.rotation = Quaternion.identity;
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;  // Reset velocity to zero
+            rb.angularVelocity = Vector3.zero;
+        }
         pool.Enqueue(bullet);
     }
 }
