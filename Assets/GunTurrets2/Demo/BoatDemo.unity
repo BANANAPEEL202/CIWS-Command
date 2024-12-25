@@ -512,6 +512,7 @@ MonoBehaviour:
   MissilePrefab: {fileID: 634730235811324, guid: 66f875ae4fa224c088e87d020b06c590,
     type: 3}
   missileSpeed: 90
+  spawnRadius: 5
 --- !u!4 &537394672
 Transform:
   m_ObjectHideFlags: 0
@@ -1147,6 +1148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114878973723029644, guid: aab03fa45caeeb945aa177a63a31371b,
+        type: 3}
+      propertyPath: maxEngagementRange
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 114982388926508418, guid: aab03fa45caeeb945aa177a63a31371b,
         type: 3}
