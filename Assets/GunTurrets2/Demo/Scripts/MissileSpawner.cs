@@ -24,14 +24,17 @@ public class MissileSpawner : MonoBehaviour
                 // Apply the random offset to the spawner's position
                 Vector3 spawnPosition = transform.position + randomOffset;
 
-                // Create a rotation for the missile with a horizontal facing direction
-                Quaternion horizontalRotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+                // Calculate direction towards the origin
+                Vector3 directionToOrigin = (Vector3.zero - spawnPosition).normalized;
+
+                // Create a rotation that points the missile towards the origin
+                Quaternion rotationToOrigin = Quaternion.LookRotation(directionToOrigin);
 
                 // Instantiate the missile at the random position
-                GameObject missile = Instantiate(MissilePrefab, spawnPosition, horizontalRotation);
+                GameObject missile = Instantiate(MissilePrefab, spawnPosition, rotationToOrigin);
 
                 // Set the missile's velocity
-                missile.GetComponent<Rigidbody>().linearVelocity = transform.forward * missileSpeed;
+                missile.GetComponent<Rigidbody>().linearVelocity = missile.transform.forward * missileSpeed;
             }
         }
     }

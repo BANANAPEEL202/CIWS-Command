@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletCollision : MonoBehaviour
 {
     private BulletPool bulletPool;
+    public GameObject explosionPrefab;
 
     private void Awake()
     {
@@ -16,7 +17,9 @@ public class BulletCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Missile"))
         {
             // Destroy the missile (or return it to the pool if it has its own pool)
+            Instantiate(explosionPrefab, transform.position, collision.transform.rotation);
             Destroy(collision.gameObject); // You can change this to returning to a missile pool if necessary
+
 
             // Return the bullet to the pool
             bulletPool.ReturnBullet(gameObject); // Return the bullet instead of destroying it
