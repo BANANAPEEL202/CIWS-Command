@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6040185388680981243}
   - component: {fileID: 3159985977405005552}
   - component: {fileID: -6347646570678293352}
-  - component: {fileID: 3921283902752904516}
   - component: {fileID: 8171368674433399135}
   m_Layer: 6
   m_Name: Bullet
@@ -138,20 +137,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3921283902752904516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6663182837911846857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6937be46a057c4692b2a9a0d3db0e852, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 7762812518593646155, guid: 064366caf3e804f83987e0d3b08e5321,
-    type: 3}
 --- !u!96 &8171368674433399135
 TrailRenderer:
   serializedVersion: 3
