@@ -25,7 +25,7 @@ public class Missile : MonoBehaviour
                 return;
             }
             else {
-                Instantiate(explosionPrefab, transform.position, collider.transform.rotation);
+                Instantiate(explosionPrefab, transform.position, gameObject.transform.rotation);
                 Destroy(gameObject); // You can change this to returning to a missile pool if necessary
             }
 
