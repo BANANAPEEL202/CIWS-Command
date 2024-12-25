@@ -1,5 +1,6 @@
-﻿using System;
+﻿
 using UnityEngine;
+
 
 namespace GT2.Demo
 {
@@ -12,6 +13,7 @@ namespace GT2.Demo
         [SerializeField] private float projectileSpeed = 50f; // Speed of the projectile
         [SerializeField] private BulletPool bulletPool = null; // Reference to the BulletPool
         [SerializeField] private float maxEngagementRange = 300f; // Maximum range to engage targets
+        [SerializeField] private float dispersion = 1.0f; // Max dispersion angle in degrees
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
@@ -134,7 +136,17 @@ namespace GT2.Demo
             if (rb != null)
             {
                 Vector3 direction = (TurretAim.AimPosition - firePoint.position).normalized;
-                rb.linearVelocity = direction * projectileSpeed; // Set the velocity
+                // Add random dispersion
+                Quaternion randomRotation = Quaternion.Euler(
+                    Random.Range(-dispersion, dispersion), 
+                    Random.Range(-dispersion, dispersion), 
+                    0);
+
+                // Adjust direction with dispersion
+                Vector3 dispersedDirection = randomRotation * direction;
+
+                // Set the velocity with dispersion
+                rb.linearVelocity = dispersedDirection * projectileSpeed;
             }
 
         }

@@ -42,7 +42,7 @@ namespace GT2
         public Vector3 AimPosition = Vector3.zero;
 
         [Tooltip("When the turret is within this many degrees of the target, it is considered aimed.")]
-        [SerializeField] private float aimedThreshold = 5f;
+        [SerializeField] private float aimedThreshold = 5;
         private float limitedTraverseAngle = 0f;
 
         [Header("Debug")]
