@@ -25,7 +25,7 @@ public class MissileSpawner : MonoBehaviour
                 Vector3 spawnPosition = transform.position + randomOffset;
 
                 // Calculate direction towards the origin
-                Vector3 target = new Vector3(50, 50, 50);
+                Vector3 target = new Vector3(0, 10, 0);
                 Vector3 directionToOrigin = (target - spawnPosition).normalized;
 
                 // Create a rotation that points the missile towards the origin
