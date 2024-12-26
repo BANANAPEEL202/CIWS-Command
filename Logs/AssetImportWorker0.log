@@ -1447,3 +1447,659 @@ Memory consumption went from 140.6 MB to 135.7 MB.
 Total: 13.708709 ms (FindLiveObjects: 0.426417 ms CreateObjectMapping: 0.506667 ms MarkObjects: 10.625250 ms  DeleteObjects: 2.150125 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 924.107877 seconds.
+  path: Assets/GunTurrets2/Demo/Prefabs/Missile.prefab
+  artifactKey: Guid(66f875ae4fa224c088e87d020b06c590) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Prefabs/Missile.prefab using Guid(66f875ae4fa224c088e87d020b06c590) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd8b03d9da78d2e0c26f1b9fa4ed4f2e1') in 0.15596225 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 78
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.473424 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1ed1d49afcfef19f33878c4097a5c0c5') in 0.009809792 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 92.920814 seconds.
+  path: Assets/GunTurrets2/Demo/Materials/ToonWater.mat
+  artifactKey: Guid(5572161e64c9c43a5b4c822022d80b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Materials/ToonWater.mat using Guid(5572161e64c9c43a5b4c822022d80b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7427b850fbc98e1502a9516c1c2fe4d5') in 0.048101458 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.63 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5174 unused Assets / (5.2 MB). Loaded Objects now: 5872.
+Memory consumption went from 134.4 MB to 129.2 MB.
+Total: 53.678417 ms (FindLiveObjects: 0.386708 ms CreateObjectMapping: 0.208875 ms MarkObjects: 49.808000 ms  DeleteObjects: 3.274583 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.677 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.44 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.581 seconds
+Domain Reload Profiling: 1260ms
+	BeginReloadAssembly (202ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (112ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (18ms)
+	LoadAllAssembliesAndSetupDomain (420ms)
+		LoadAssemblies (285ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (176ms)
+			TypeCache.Refresh (24ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (143ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (581ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (488ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (79ms)
+			ProcessInitializeOnLoadAttributes (266ms)
+			ProcessInitializeOnLoadMethodAttributes (135ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (2ms)
+Refreshing native plugins compatible for Editor in 1.26 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5205 unused Assets / (5.3 MB). Loaded Objects now: 5873.
+Memory consumption went from 140.9 MB to 135.6 MB.
+Total: 10.527208 ms (FindLiveObjects: 0.340000 ms CreateObjectMapping: 0.241042 ms MarkObjects: 7.897792 ms  DeleteObjects: 2.047791 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 104.614308 seconds.
+  path: Assets/GunTurrets2/Demo/Scripts/NormalsReplacementShader.cs
+  artifactKey: Guid(12d211b75889d459a898ad8250615319) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Scripts/NormalsReplacementShader.cs using Guid(12d211b75889d459a898ad8250615319) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0d84d0852af558689587fd6b4feff19f') in 0.001325625 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.299705 seconds.
+  path: Assets/GunTurrets2/Demo/Scripts/CameraDepthTextureMode.cs
+  artifactKey: Guid(fdb29a97edbd345df832061c94bbae06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Scripts/CameraDepthTextureMode.cs using Guid(fdb29a97edbd345df832061c94bbae06) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '43331eb3a1f6c1b6a910716fc95d3a08') in 0.001416 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.690 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.03 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.667 seconds
+Domain Reload Profiling: 1359ms
+	BeginReloadAssembly (275ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (164ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (20ms)
+	LoadAllAssembliesAndSetupDomain (355ms)
+		LoadAssemblies (241ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (160ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (143ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (667ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (571ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (99ms)
+			ProcessInitializeOnLoadAttributes (299ms)
+			ProcessInitializeOnLoadMethodAttributes (164ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5205 unused Assets / (5.9 MB). Loaded Objects now: 5875.
+Memory consumption went from 140.8 MB to 134.9 MB.
+Total: 13.057625 ms (FindLiveObjects: 0.438792 ms CreateObjectMapping: 0.316708 ms MarkObjects: 9.341875 ms  DeleteObjects: 2.959958 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 316.830674 seconds.
+  path: Assets/GunTurrets2/Demo/Water/PerlinNoise.png
+  artifactKey: Guid(1d89bf22e0c844481b52e92046330bef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/PerlinNoise.png using Guid(1d89bf22e0c844481b52e92046330bef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f0d7c56c5d303ad06288c1f0e381ce44') in 0.085836 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 241.898752 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.013460875 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003094 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001117375 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007294 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001059875 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.010881 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001217 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008073 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001095292 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007780 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001036375 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006902 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.000998041 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.005392 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.000890375 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000576 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.002662875 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000573 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.001580625 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000591 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.000878084 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000468 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00000000000000000000000000000000') in 0.00081325 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+  ERROR: Build asset version error: assets/gunturrets2/demo/water/toonwater.shader in SourceAssetDB has modification time of '2024-12-26T22:52:32Z' while content on disk has modification time of '2024-12-26T22:53:24Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.421499 seconds.
+  path: Assets/GunTurrets2/Demo/Water/ToonWater.shader
+  artifactKey: Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/ToonWater.shader using Guid(da7a81cd03e9243de94283c8ddd2ed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5e6991fb9fa69248b3a17525d23a2297') in 0.000946 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.590 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.24 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.40 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.850 seconds
+Domain Reload Profiling: 1441ms
+	BeginReloadAssembly (182ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (10ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (82ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (14ms)
+	LoadAllAssembliesAndSetupDomain (358ms)
+		LoadAssemblies (255ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (147ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (127ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (850ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (739ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (105ms)
+			ProcessInitializeOnLoadAttributes (370ms)
+			ProcessInitializeOnLoadMethodAttributes (254ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 2.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (4.5 MB). Loaded Objects now: 5879.
+Memory consumption went from 141.0 MB to 136.4 MB.
+Total: 22.413000 ms (FindLiveObjects: 0.767541 ms CreateObjectMapping: 0.481667 ms MarkObjects: 16.065541 ms  DeleteObjects: 5.044500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 206.994337 seconds.
+  path: Assets/GunTurrets2/Demo/Water/HiddenNormalsTexture.shader
+  artifactKey: Guid(ed9bbab77645e43dbae068ae83a31946) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Water/HiddenNormalsTexture.shader using Guid(ed9bbab77645e43dbae068ae83a31946) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '862c9fd12e8da8763a1bd57b7d2d9899') in 0.017162083 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.554 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 0.95 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 2.61 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.714 seconds
+Domain Reload Profiling: 1270ms
+	BeginReloadAssembly (178ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (8ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (85ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (16ms)
+	LoadAllAssembliesAndSetupDomain (324ms)
+		LoadAssemblies (236ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (124ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (108ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (714ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (609ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (94ms)
+			ProcessInitializeOnLoadAttributes (332ms)
+			ProcessInitializeOnLoadMethodAttributes (173ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (7ms)
+Refreshing native plugins compatible for Editor in 1.84 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (5.3 MB). Loaded Objects now: 5881.
+Memory consumption went from 140.8 MB to 135.6 MB.
+Total: 15.698167 ms (FindLiveObjects: 0.632458 ms CreateObjectMapping: 0.454542 ms MarkObjects: 10.547458 ms  DeleteObjects: 4.063292 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.536 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.43 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 2.34 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.855 seconds
+Domain Reload Profiling: 1393ms
+	BeginReloadAssembly (172ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (9ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (83ms)
+	RebuildCommonClasses (29ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (15ms)
+	LoadAllAssembliesAndSetupDomain (312ms)
+		LoadAssemblies (233ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (104ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (855ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (767ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (106ms)
+			ProcessInitializeOnLoadAttributes (405ms)
+			ProcessInitializeOnLoadMethodAttributes (247ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (5.3 MB). Loaded Objects now: 5883.
+Memory consumption went from 140.7 MB to 135.4 MB.
+Total: 16.052917 ms (FindLiveObjects: 0.536208 ms CreateObjectMapping: 0.536375 ms MarkObjects: 11.835792 ms  DeleteObjects: 3.144041 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.536 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.00 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.53 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.688 seconds
+Domain Reload Profiling: 1226ms
+	BeginReloadAssembly (159ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (9ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (71ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (15ms)
+	LoadAllAssembliesAndSetupDomain (326ms)
+		LoadAssemblies (246ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (119ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (103ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (689ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (608ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (82ms)
+			ProcessInitializeOnLoadAttributes (361ms)
+			ProcessInitializeOnLoadMethodAttributes (158ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (5.6 MB). Loaded Objects now: 5885.
+Memory consumption went from 140.7 MB to 135.2 MB.
+Total: 21.141291 ms (FindLiveObjects: 0.647250 ms CreateObjectMapping: 0.858959 ms MarkObjects: 13.052500 ms  DeleteObjects: 6.581500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.637 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.74 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.897 seconds
+Domain Reload Profiling: 1537ms
+	BeginReloadAssembly (161ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (76ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (17ms)
+	LoadAllAssembliesAndSetupDomain (426ms)
+		LoadAssemblies (316ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (145ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (120ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (897ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (732ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (10ms)
+			BeforeProcessingInitializeOnLoad (144ms)
+			ProcessInitializeOnLoadAttributes (396ms)
+			ProcessInitializeOnLoadMethodAttributes (177ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (2ms)
+Refreshing native plugins compatible for Editor in 1.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (5.2 MB). Loaded Objects now: 5887.
+Memory consumption went from 140.7 MB to 135.6 MB.
+Total: 13.879458 ms (FindLiveObjects: 0.475458 ms CreateObjectMapping: 0.432417 ms MarkObjects: 9.895083 ms  DeleteObjects: 3.076292 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16f167000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.572 seconds
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/GunTurrets2/Demo/Water/Crest/Crest/Scripts/LodData/RegisterLodDataInput.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.00 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 3.15 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.835 seconds
+Domain Reload Profiling: 1409ms
+	BeginReloadAssembly (179ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (9ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (90ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (19ms)
+	LoadAllAssembliesAndSetupDomain (340ms)
+		LoadAssemblies (249ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (131ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (109ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (835ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (735ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (89ms)
+			ProcessInitializeOnLoadAttributes (419ms)
+			ProcessInitializeOnLoadMethodAttributes (218ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (4ms)
+Refreshing native plugins compatible for Editor in 2.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5206 unused Assets / (5.4 MB). Loaded Objects now: 5889.
+Memory consumption went from 140.7 MB to 135.3 MB.
+Total: 17.353292 ms (FindLiveObjects: 0.663458 ms CreateObjectMapping: 0.426250 ms MarkObjects: 11.326333 ms  DeleteObjects: 4.936750 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 863.890330 seconds.
+  path: Assets/GunTurrets2/Demo/Models/Phalanx Barrel/tinker.obj
+  artifactKey: Guid(a1c48a2ef693447e39710c44953c8354) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Models/Phalanx Barrel/tinker.obj using Guid(a1c48a2ef693447e39710c44953c8354) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '44b3135e72be2d0ab560a78e1d13c6e3') in 0.192429042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
+
+========================================================================
+Received Import Request.
+  Time since last request: 110.686790 seconds.
+  path: Assets/GunTurrets2/Demo/Models/Phalanx Base/tinker.obj
+  artifactKey: Guid(8f04845244acc406e83c4a808c62aa20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Models/Phalanx Base/tinker.obj using Guid(8f04845244acc406e83c4a808c62aa20) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '826a6270228f0cffccc06312c280e20b') in 0.060500834 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
