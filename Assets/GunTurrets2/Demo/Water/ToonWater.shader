@@ -39,14 +39,14 @@
     {
 		Tags
 		{
-			"Queue" = "Transparent"
+			//"Queue" = "Transparent"
 		}
 
         Pass
         {
 			// Transparent "normal" blending.
-			Blend SrcAlpha OneMinusSrcAlpha
-			ZWrite Off
+			//Blend SrcAlpha OneMinusSrcAlpha
+			//ZWrite Off
 
             CGPROGRAM
 			#define SMOOTHSTEP_AA 0.01
@@ -71,7 +71,7 @@
             {
                 float4 vertex : POSITION;
 				float4 uv : TEXCOORD0;
-				float3 normal : NORMAL;
+				float3 normal : NORMAL; 
             };
 
             struct v2f
