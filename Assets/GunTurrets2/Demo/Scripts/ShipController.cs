@@ -19,8 +19,13 @@ public class ShipController : MonoBehaviour
     private Rigidbody rb;
 
     // Rocking effect variables
-    private Vector3 eulers = Vector3.zero;
     private float offset = 0f;
+
+    // Particle systems for the ship
+    public ParticleSystem sternWake; // First particle system
+    public float maxSternWakeSpeed = 1f; // Max speed for the stern wake
+    public ParticleSystem bowWake; // Second particle system
+    public float maxBowWakeSpeed = 10f; // Max speed for the bow wake
 
     void Start()
     {
@@ -45,6 +50,7 @@ public class ShipController : MonoBehaviour
         // Handle input and adjust orientation
         HandleInput();
         ApplyRockingEffect();
+        AdjustParticleSpeed();
     }
 
     private void HandleInput()
@@ -103,7 +109,7 @@ public class ShipController : MonoBehaviour
 
         // Apply banking visually (rotation around local z-axis)
         Vector3 localEulerAngles = transform.localEulerAngles;
-        localEulerAngles.z = currentBank;
+        localEulerAngles.z = currentBank; // Bank rotation remains here
         transform.localEulerAngles = localEulerAngles;
     }
 
@@ -115,11 +121,30 @@ public class ShipController : MonoBehaviour
 
     private void ApplyRockingEffect()
     {
-        // Apply the rocking effect to the ship's rotation
+        // Apply the rocking effect to the ship's roll (z-axis) without affecting the banking
         var time = Time.time;
-        eulers.x = Mathf.Sin(time * rockingSpeed + offset) * rockingStrength;
-        eulers.z = Mathf.Cos(time * rockingSpeed * 0.8f + 11f + offset) * rockingStrength;
+        float rockingRoll = Mathf.Sin(time * rockingSpeed + offset) * rockingStrength;
 
-        transform.localEulerAngles = eulers;
+        // Store the current rotation, and apply the rocking only to the z-axis (roll)
+        Vector3 currentRotation = transform.localEulerAngles;
+        currentRotation.z += rockingRoll;
+
+        // Apply the new rotation
+        transform.localEulerAngles = currentRotation;
+    }
+    private void AdjustParticleSpeed()
+    {
+        // Get the main modules of the particle systems
+        var main1 = sternWake.main;
+        var main2 = bowWake.main;
+
+        // Adjust the start speed based on the current forward speed of the ship
+        main1.startSpeed = maxSternWakeSpeed * currentForwardSpeed / maxForwardSpeed;
+        if (currentForwardSpeed > 1) {
+            main2.startSpeed = Mathf.Max(0.3f*maxBowWakeSpeed, maxBowWakeSpeed * currentForwardSpeed / maxForwardSpeed);
+        }
+        else {
+            main2.startSpeed = 0;
+        }
     }
 }
