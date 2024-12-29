@@ -9,12 +9,13 @@ public class MissileSpawner : MonoBehaviour
     public float spawnRadius = 5f;
 
     // Reference to the target object
-    public Transform target;
+    private Transform target;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            target = GameObject.FindGameObjectWithTag("Target").transform;
             if (MissilePrefab != null && target != null)
             {
                 // Randomize the spawn position within a circular area around the spawner

@@ -8,12 +8,18 @@ public class Missile : MonoBehaviour
     
     // Reference to the target the missile will track
     public Transform target;
-    public float rotationSpeed = 5f; // Speed at which the missile turns towards the target
+    public float rotationSpeed = 45; // Speed at which the missile turns towards the target
+    public float missileSpeed = 90f; // Speed at which the missile moves towards the target
+
+    private Rigidbody rb;
 
     private void Awake()
     {
         // Get a reference to the BulletPool (assuming it's on the same GameObject or a parent object)
-        bulletPool = FindFirstObjectByType<BulletPool>(); 
+        bulletPool = FindFirstObjectByType<BulletPool>();
+
+        // Initialize the Rigidbody for physics-based movement
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -21,16 +27,22 @@ public class Missile : MonoBehaviour
         if (target != null)
         {
             // Calculate direction towards the target
-            Vector3 directionToTarget = target.position - transform.position;
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-50f, 50f),
+                0,
+                Random.Range(-50f, 50f)
+            );
+            Vector3 directionToTarget = target.position - transform.position + randomOffset;
+            directionToTarget.Normalize();
 
             // Calculate the rotation step
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
 
-            // Smoothly rotate the missile towards the target using Lerp
+            // Smoothly rotate the missile towards the target using Slerp
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            // Optionally, move the missile forward to follow the target (if needed)
-            transform.Translate(Vector3.forward * Time.deltaTime * 10f);  // Adjust speed as necessary
+            // Adjust the missile's velocity to move in the right direction
+            rb.linearVelocity = transform.forward * missileSpeed;
         }
     }
 

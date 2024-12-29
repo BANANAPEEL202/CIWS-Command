@@ -19,7 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _FoamMaxDistance
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -78,6 +78,7 @@ Material:
     - _DepthMaxDistance: 60
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FadeFactor: 0.005
     - _FoamMaxDistance: 3
     - _FoamMinDistance: 0.04
     - _GlossMapScale: 1
@@ -95,6 +96,7 @@ Material:
     - _SurfaceDistortionAmount: 1
     - _SurfaceNoiseCutoff: 0.59
     - _SurfaceNoiseScale: 1
+    - _TileFactor: 0.1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
