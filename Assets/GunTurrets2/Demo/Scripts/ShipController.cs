@@ -55,6 +55,7 @@ public class ShipController : MonoBehaviour
 
     private void HandleInput()
     {
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         // Forward movement
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -124,10 +125,12 @@ public class ShipController : MonoBehaviour
         // Apply the rocking effect to the ship's roll (z-axis) without affecting the banking
         var time = Time.time;
         float rockingRoll = Mathf.Sin(time * rockingSpeed + offset) * rockingStrength;
+        float rockingPitch = Mathf.Cos(time * rockingSpeed * .8f + 11f + offset) * rockingStrength;
 
         // Store the current rotation, and apply the rocking only to the z-axis (roll)
         Vector3 currentRotation = transform.localEulerAngles;
         currentRotation.z += rockingRoll;
+        currentRotation.x += rockingRoll;
 
         // Apply the new rotation
         transform.localEulerAngles = currentRotation;
