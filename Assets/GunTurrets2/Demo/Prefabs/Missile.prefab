@@ -158,6 +158,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 7762812518593646155, guid: 064366caf3e804f83987e0d3b08e5321,
     type: 3}
   health: 3
+  target: {fileID: 0}
+  rotationSpeed: 5
 --- !u!1 &1512384223744023223
 GameObject:
   m_ObjectHideFlags: 0
