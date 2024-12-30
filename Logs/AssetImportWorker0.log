@@ -9807,3 +9807,81 @@ Received Import Request.
 Start importing Assets/GunTurrets2/Demo/Prefabs/Missile.prefab using Guid(66f875ae4fa224c088e87d020b06c590) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a39b1201b9f5c6cf9341ca6acd70e771') in 0.01183875 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 78
 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.23 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5034 unused Assets / (3.5 MB). Loaded Objects now: 5977.
+Memory consumption went from 198.6 MB to 195.2 MB.
+Total: 20.857208 ms (FindLiveObjects: 0.401792 ms CreateObjectMapping: 0.274375 ms MarkObjects: 18.561958 ms  DeleteObjects: 1.618541 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16d9ef000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.610 seconds
+Refreshing native plugins compatible for Editor in 1.80 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 2.67 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.619 seconds
+Domain Reload Profiling: 1231ms
+	BeginReloadAssembly (181ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (94ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (366ms)
+		LoadAssemblies (282ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (133ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (112ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (619ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (532ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (294ms)
+			ProcessInitializeOnLoadMethodAttributes (159ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (2ms)
+Refreshing native plugins compatible for Editor in 2.51 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5065 unused Assets / (3.1 MB). Loaded Objects now: 5978.
+Memory consumption went from 198.8 MB to 195.7 MB.
+Total: 14.173542 ms (FindLiveObjects: 0.603625 ms CreateObjectMapping: 0.323542 ms MarkObjects: 11.525250 ms  DeleteObjects: 1.720708 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 482.031406 seconds.
+  path: Assets/GunTurrets2/Demo/BoatDemo.unity
+  artifactKey: Guid(f335d78b8e839db4f88deefd55fcb7b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/BoatDemo.unity using Guid(f335d78b8e839db4f88deefd55fcb7b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'be556b5872d1a4df9fc86e597cb23062') in 0.006123584 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.434158 seconds.
+  path: Assets/GunTurrets2/Demo/BoatDemo.unity
+  artifactKey: Guid(f335d78b8e839db4f88deefd55fcb7b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/BoatDemo.unity using Guid(f335d78b8e839db4f88deefd55fcb7b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90ca967114cdaa709723e6a6d1c434a5') in 0.000873083 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+

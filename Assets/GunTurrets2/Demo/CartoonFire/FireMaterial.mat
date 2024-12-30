@@ -104,6 +104,8 @@ Material:
     - Vector1_35f8966028644797aebe96d1e73a815b: 0.3
     - Vector1_90038cfeb36146e5bb3e8aa44ea7744f: 0.05
     - _AlphaClip: 0
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
