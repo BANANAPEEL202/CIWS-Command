@@ -13,13 +13,14 @@ namespace GT2.Demo
         [SerializeField] private float projectileSpeed = 50f; // Speed of the projectile
         [SerializeField] private BulletPool bulletPool = null; // Reference to the BulletPool
         [SerializeField] private float maxEngagementRange = 300f; // Maximum range to engage targets
+        [SerializeField] private float minimumEngagementRange = 25; // Max dispersion angle in degrees
         [SerializeField] private float dispersion = 1.0f; // Max dispersion angle in degrees
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
         private SoundController soundController; // Reference to the Sound Controller
         
-        private float fireCooldown = 0f;
+        private float fireCooldown = 1f;
         private bool isShooting = false; // Tracks whether the turret is actively shooting
 
         private void Awake()
@@ -37,8 +38,10 @@ namespace GT2.Demo
 
         private void Update()
         {
-            if (TurretAim == null || Bullet == null)
+            if (TurretAim == null || Bullet == null) {
+                fireCooldown = 1f;
                 return;
+            }
             if (bulletPool == null){
                 Debug.LogError(name + ": TurretController not assigned a BulletPool!");
                 return;
@@ -55,10 +58,31 @@ namespace GT2.Demo
                 StopFiringSound();
                 return;
             }
-            FindTarget();
+            float distance = FindTarget();
             if (targetPoint != null) {
                 Vector3 predictedPosition = PredictTargetPosition();
-                TurretAim.AimPosition = predictedPosition;
+                Vector3 randomOffset = Vector3.zero;
+                Quaternion randomRotation = Quaternion.identity;
+                if (distance > 100) {
+                    randomRotation = Quaternion.Euler(
+                        Random.Range(-dispersion, dispersion), 
+                        Random.Range(-dispersion, dispersion), 
+                        0);
+                }
+                else {
+                    randomOffset = new Vector3(
+                        Random.Range(-dispersion, dispersion),
+                        Random.Range(-dispersion, dispersion),
+                        Random.Range(-dispersion, dispersion)
+                    );
+                }
+                predictedPosition += randomOffset;
+
+                // Apply dispersion to the turret's aiming direction
+                Vector3 aimDirection = predictedPosition - TurretAim.transform.position;
+                aimDirection = randomRotation * aimDirection;
+
+                TurretAim.AimPosition = TurretAim.transform.position + aimDirection;
 
                 if (TurretAim.IsAimed)
                 {
@@ -78,44 +102,12 @@ namespace GT2.Demo
                 else{
                     StopFiringSound();
                 }
-                    
             }
             else {
                 // Reset aim position
                 TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
                 StopFiringSound();
             }
-
-
-                    
-        }
-
-        private void FindTarget()
-        {
-            GameObject[] missiles = GameObject.FindGameObjectsWithTag("Missile");
-            float closestDistance = float.MaxValue;
-            Transform closestTarget = null;
-            Rigidbody closestRigedBody = null;
-
-            foreach (GameObject missile in missiles)
-            {
-                float distance = Vector3.Distance(transform.position, missile.transform.position);
-
-                // Calculate the angle to the target in the horizontal plane
-                Vector3 targetDirection = missile.transform.position - transform.position;
-                Vector3 flattenedDirection = Vector3.ProjectOnPlane(targetDirection, transform.up);
-                float angleToTarget = Vector3.SignedAngle(transform.forward, flattenedDirection, transform.up);
-
-                // Check if the target is within the traverse range
-                if (distance < maxEngagementRange && distance < closestDistance && Mathf.Abs(angleToTarget) <= TurretAim.RightLimit && Mathf.Abs(angleToTarget) >= -TurretAim.LeftLimit)
-                {
-                    closestDistance = distance;
-                    closestTarget = missile.transform;
-                    closestRigedBody = missile.GetComponent<Rigidbody>();
-                }
-            }
-            targetPoint = closestTarget;
-            targetRigidbody = closestRigedBody;
         }
 
         private void Shoot()
@@ -136,20 +128,42 @@ namespace GT2.Demo
             if (rb != null)
             {
                 Vector3 direction = (TurretAim.AimPosition - firePoint.position).normalized;
-                // Add random dispersion
-                Quaternion randomRotation = Quaternion.Euler(
-                    Random.Range(-dispersion, dispersion), 
-                    Random.Range(-dispersion, dispersion), 
-                    0);
 
-                // Adjust direction with dispersion
-                Vector3 dispersedDirection = randomRotation * direction;
-
-                // Set the velocity with dispersion
-                rb.linearVelocity = dispersedDirection * projectileSpeed;
+                // Set the velocity with no additional dispersion on the projectile direction
+                rb.linearVelocity = direction * projectileSpeed;
             }
-
         }
+
+        private float FindTarget()
+        {
+            GameObject[] missiles = GameObject.FindGameObjectsWithTag("Missile");
+            float closestDistance = float.MaxValue;
+            Transform closestTarget = null;
+            Rigidbody closestRigedBody = null;
+
+            foreach (GameObject missile in missiles)
+            {
+                float distance = Vector3.Distance(transform.position, missile.transform.position);
+
+                // Calculate the angle to the target in the horizontal plane
+                Vector3 targetDirection = missile.transform.position - transform.position;
+                Vector3 flattenedDirection = Vector3.ProjectOnPlane(targetDirection, transform.up);
+                float angleToTarget = Vector3.SignedAngle(transform.forward, flattenedDirection, transform.up);
+
+                // Check if the target is within the traverse range
+                if (minimumEngagementRange < distance && distance < maxEngagementRange && distance < closestDistance && Mathf.Abs(angleToTarget) <= TurretAim.RightLimit && Mathf.Abs(angleToTarget) >= -TurretAim.LeftLimit)
+                {
+                    closestDistance = distance;
+                    closestTarget = missile.transform;
+                    closestRigedBody = missile.GetComponent<Rigidbody>();
+                }
+            }
+            targetPoint = closestTarget;
+            targetRigidbody = closestRigedBody;
+            return closestDistance;
+        }
+
+        
 
         private Vector3 PredictTargetPosition()
         {

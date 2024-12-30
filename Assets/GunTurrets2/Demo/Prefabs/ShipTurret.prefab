@@ -158,7 +158,7 @@ MonoBehaviour:
   turretBase: {fileID: 8920652918945442696}
   barrels: {fileID: 1423938687696781502}
   ElevationSpeed: 92
-  MaxElevation: 60
+  MaxElevation: 90
   MaxDepression: 5
   TraverseSpeed: 126
   hasLimitedTraverse: 1

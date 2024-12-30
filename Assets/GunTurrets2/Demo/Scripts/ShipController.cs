@@ -57,6 +57,13 @@ public class ShipController : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         // Forward movement
+        if (Input.GetKey(KeyCode.R)){
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+            foreach (GameObject target in targets){
+                Target targetScript = target.GetComponent<Target>();
+                targetScript.ResetTarget();
+            }
+        }
         if (Input.GetKey(KeyCode.UpArrow))
         {
             // Gradually increase forward speed using an exponential-like curve
