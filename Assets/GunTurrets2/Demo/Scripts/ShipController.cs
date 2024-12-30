@@ -56,7 +56,8 @@ public class ShipController : MonoBehaviour
     private void HandleInput()
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        // Forward movement
+        
+        // Reset targets (if needed)
         if (Input.GetKey(KeyCode.R)){
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
             foreach (GameObject target in targets){
@@ -64,6 +65,8 @@ public class ShipController : MonoBehaviour
                 targetScript.ResetTarget();
             }
         }
+
+        // Forward movement
         if (Input.GetKey(KeyCode.UpArrow))
         {
             // Gradually increase forward speed using an exponential-like curve
@@ -142,6 +145,7 @@ public class ShipController : MonoBehaviour
         // Apply the new rotation
         transform.localEulerAngles = currentRotation;
     }
+
     private void AdjustParticleSpeed()
     {
         // Get the main modules of the particle systems
@@ -151,7 +155,7 @@ public class ShipController : MonoBehaviour
         // Adjust the start speed based on the current forward speed of the ship
         main1.startSpeed = maxSternWakeSpeed * currentForwardSpeed / maxForwardSpeed;
         if (currentForwardSpeed > 1) {
-            main2.startSpeed = Mathf.Max(0.3f*maxBowWakeSpeed, maxBowWakeSpeed * currentForwardSpeed / maxForwardSpeed);
+            main2.startSpeed = Mathf.Max(0.3f * maxBowWakeSpeed, maxBowWakeSpeed * currentForwardSpeed / maxForwardSpeed);
         }
         else {
             main2.startSpeed = 0;

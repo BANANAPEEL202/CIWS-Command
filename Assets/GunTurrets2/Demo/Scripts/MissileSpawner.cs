@@ -3,12 +3,14 @@ using UnityEngine;
 public class MissileSpawner : MonoBehaviour
 {
     public GameObject MissilePrefab = null;
+    public GameObject ship;
 
     // Range for random position variation
     public float spawnRadius = 5f;
 
     void Update()
     {
+        transform.position = ship.transform.position + new Vector3(2000, 0, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Get all targets with the "Target" tag

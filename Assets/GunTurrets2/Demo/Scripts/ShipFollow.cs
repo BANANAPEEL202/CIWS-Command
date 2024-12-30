@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShipFollow : MonoBehaviour
 {
     public Transform ship;  // Reference to the ship's transform
-    public float distance = 100f;  // The distance from the ship
+    public float distance = 60f;  // The distance from the ship
     public float rotationSpeed = 8f;  // Speed at which the camera rotates around the ship
     public float verticalRotationSpeed = 8f;  // Speed of vertical camera movement (up/down)
     public float minVerticalAngle = -90f;  // Minimum vertical angle
@@ -13,7 +13,7 @@ public class ShipFollow : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, 5);  // Offset from the ship's center
 
     private float currentHorizontalAngle = 0f;  // Horizontal angle around the ship
-    private float currentVerticalAngle = -45f;  // Vertical angle up/down
+    private float currentVerticalAngle = -15f;  // Vertical angle up/down
 
     void Update()
     {
