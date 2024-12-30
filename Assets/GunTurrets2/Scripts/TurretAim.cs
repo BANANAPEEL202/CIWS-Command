@@ -42,7 +42,7 @@ namespace GT2
         public Vector3 AimPosition = Vector3.zero;
 
         [Tooltip("When the turret is within this many degrees of the target, it is considered aimed.")]
-        [SerializeField] private float aimedThreshold = 5;
+        [SerializeField] private float aimedThreshold = 10;
         private float limitedTraverseAngle = 0f;
 
         [Header("Debug")]
@@ -54,7 +54,7 @@ namespace GT2
 
         private bool hasBarrels = false;
 
-        private bool isAimed = false;
+        public bool isAimed = false;
         private bool isBaseAtRest = false;
         private bool isBarrelAtRest = false;
 

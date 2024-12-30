@@ -5,7 +5,7 @@ public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private int poolSize = 10; // Size of the pool
-    [SerializeField] private float despawnDistance = 100f; // Max distance before despawning
+    [SerializeField] private float despawnDistance = 500f; // Max distance before despawning
 
     private Queue<GameObject> pool;
     private List<GameObject> activeBullets; // List to track active bullets
@@ -84,7 +84,8 @@ public class BulletPool : MonoBehaviour
     // Return a bullet to the pool
     public void ReturnBullet(GameObject bullet)
     {
-        bullet.SetActive(false); // Deactivate the bullet before returning it to the pool
+        bullet.SetActive(false); // Deactivate the bullet before returning it to the poASol
+        activeBullets.Remove(bullet); // Remove the bullet from the active list
         bullet.transform.rotation = Quaternion.identity;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
