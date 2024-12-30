@@ -1,0 +1,40 @@
+name: Build and Deploy Unity Project
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action on push to main branch (adjust to your branch name)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Step 2: Set up Unity
+    - name: Set up Unity
+      uses: game-ci/unity-actions/setup@v2
+      with:
+        version: 2023.1.0f1  # Specify the Unity version you're using
+
+    # Step 3: Install dependencies (if any)
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y libgtk-3-0 libnss3 libasound2
+
+    # Step 4: Build the Unity project
+    - name: Build project
+      run: |
+        # Ensure that Unity is headless (no UI required)
+        ./unity-editor -batchmode -nographics -silent-crashes -projectPath . -buildTarget WebGL -executeMethod BuildScript.Build
+        # Replace BuildScript.Build with your own build method, if necessary
+
+    # Step 5: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages  # Deploy to gh-pages branch
+        folder: Build/WebGL # Adjust this path to where Unity builds your WebGL files
