@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject ship = null;
     [SerializeField] private int poolSize = 10; // Size of the pool
     [SerializeField] private float despawnDistance = 500f; // Max distance before despawning
 
@@ -23,22 +25,6 @@ public class BulletPool : MonoBehaviour
             pool.Enqueue(bullet);
         }
     }
-    
-    private void OnEnable()
-    {
-        if (pool == null)
-        {
-            pool = new Queue<GameObject>();
-            activeBullets = new List<GameObject>();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                GameObject bullet = Instantiate(bulletPrefab);
-                bullet.SetActive(false);
-                pool.Enqueue(bullet);
-            }
-        }
-    }
 
     private void Update()
     {
@@ -46,10 +32,9 @@ public class BulletPool : MonoBehaviour
         for (int i = activeBullets.Count - 1; i >= 0; i--)
         {
             GameObject bullet = activeBullets[i];
-            if (bullet.activeSelf && Vector3.Distance(bullet.transform.position, Vector3.zero) > despawnDistance)
+            if (bullet.activeSelf && Vector3.Distance(bullet.transform.position, ship.transform.position) > despawnDistance)
             {
                 ReturnBullet(bullet);
-                activeBullets.RemoveAt(i);
             }
         }
     }
@@ -75,8 +60,6 @@ public class BulletPool : MonoBehaviour
             return bullet;
         }
 
-        // Optionally, you can instantiate a new bullet if the pool is empty
-        // But this is generally not recommended as it negates the performance benefits of pooling
         Debug.LogWarning("Bullet pool is empty! Consider increasing the pool size.");
         return null;
     }
@@ -84,15 +67,21 @@ public class BulletPool : MonoBehaviour
     // Return a bullet to the pool
     public void ReturnBullet(GameObject bullet)
     {
-        bullet.SetActive(false); // Deactivate the bullet before returning it to the poASol
+        bullet.SetActive(false); // Deactivate the bullet before returning it to the pool
         activeBullets.Remove(bullet); // Remove the bullet from the active list
-        bullet.transform.rotation = Quaternion.identity;
+        bullet.transform.rotation = Quaternion.identity; // Reset rotation
+
+        // Optional: Reset position
+        bullet.transform.position = Vector3.zero; // Or set to a specific position if needed
+
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;  // Reset velocity to zero
-            rb.angularVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero; // Reset angular velocity
+            rb.Sleep(); // Optional: Put Rigidbody to sleep
         }
-        pool.Enqueue(bullet);
+
+        pool.Enqueue(bullet); // Return the bullet to the pool
     }
 }

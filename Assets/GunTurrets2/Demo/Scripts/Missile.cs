@@ -24,6 +24,10 @@ public class Missile : MonoBehaviour
     private void Awake()
     {
         bulletPool = FindFirstObjectByType<BulletPool>();
+        if (bulletPool == null)
+        {
+            Debug.LogError("No BulletPool found in the scene!");
+        }
         rb = GetComponent<Rigidbody>();
         randomOffset = new Vector3(
             Random.Range(-10f, 10f),

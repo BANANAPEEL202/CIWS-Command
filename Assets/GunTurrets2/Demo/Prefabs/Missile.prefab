@@ -159,7 +159,7 @@ MonoBehaviour:
     type: 3}
   health: 3
   target: {fileID: 0}
-  rotationSpeed: 50
+  rotationSpeed: 10
   missileSpeed: 110
   lowAltitude: 5
   ascendDistanceThreshold: 125
