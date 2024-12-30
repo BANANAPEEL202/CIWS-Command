@@ -63,11 +63,11 @@ namespace GT2.Demo
                 Vector3 predictedPosition = PredictTargetPosition();
                 Vector3 randomOffset = Vector3.zero;
                 Quaternion randomRotation = Quaternion.identity;
-                if (distance > 100) {
+                if (distance < 50) {
                     randomRotation = Quaternion.Euler(
                         Random.Range(-dispersion, dispersion), 
                         Random.Range(-dispersion, dispersion), 
-                        0);
+                        Random.Range(-dispersion, dispersion));
                 }
                 else {
                     randomOffset = new Vector3(
