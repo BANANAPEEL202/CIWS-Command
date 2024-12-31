@@ -12,6 +12,8 @@ public class ShipController : MonoBehaviour
     public float drag = 0.1f; // Simulates air/water resistance
     public float rockingStrength = 1f; // Strength of the rocking effect
     public float rockingSpeed = 1f; // Speed of the rocking effect
+    public AudioSource shipAudioSource; // Reference to the AudioSource
+    public float maxVolume = 1f;        // Maximum volume
 
     // Internal variables
     private float currentForwardSpeed = 0f; // Tracks current speed
@@ -43,6 +45,18 @@ public class ShipController : MonoBehaviour
 
         // Initialize the offset for the rocking effect
         offset = Random.Range(0f, 1000f);
+
+        // Ensure the AudioSource is attached
+        if (shipAudioSource == null)
+        {
+            shipAudioSource = GetComponent<AudioSource>();
+        }
+
+        if (shipAudioSource != null)
+        {
+            shipAudioSource.loop = true;
+            shipAudioSource.Play();
+        }
     }
 
     void Update()
@@ -51,6 +65,7 @@ public class ShipController : MonoBehaviour
         HandleInput();
         ApplyRockingEffect();
         AdjustParticleSpeed();
+        AdjustAudioVolume();
     }
 
     private void HandleInput()
@@ -161,4 +176,13 @@ public class ShipController : MonoBehaviour
             main2.startSpeed = 0;
         }
     }
+
+    private void AdjustAudioVolume()
+{
+    if (shipAudioSource != null)
+    {
+        // Adjust the volume based on the current forward speed
+        shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, currentForwardSpeed / maxForwardSpeed);
+    }
+}
 }
