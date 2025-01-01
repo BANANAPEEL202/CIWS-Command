@@ -118,7 +118,7 @@ public class ShipController : MonoBehaviour
             }
             */
         }
-        Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
+        //Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
         switch (currentSpeedState)
         {
             case SpeedState.Reverse:

@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ShipFollow : MonoBehaviour
@@ -42,7 +43,7 @@ public class ShipFollow : MonoBehaviour
 
         // Calculate the new camera position
         float x = shipPositionWithOffset.x + distance * Mathf.Sin(currentVerticalAngle * Mathf.Deg2Rad) * Mathf.Sin(currentHorizontalAngle * Mathf.Deg2Rad);
-        float y = shipPositionWithOffset.y + distance * Mathf.Cos(currentVerticalAngle * Mathf.Deg2Rad);
+        float y = math.max(5, shipPositionWithOffset.y + distance * Mathf.Cos(currentVerticalAngle * Mathf.Deg2Rad));
         float z = shipPositionWithOffset.z + distance * Mathf.Sin(currentVerticalAngle * Mathf.Deg2Rad) * Mathf.Cos(currentHorizontalAngle * Mathf.Deg2Rad);
 
         // Set the camera's position
