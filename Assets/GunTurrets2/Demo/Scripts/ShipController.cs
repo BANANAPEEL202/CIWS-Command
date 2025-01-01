@@ -4,8 +4,7 @@ public class ShipController : MonoBehaviour
 {
     // Public fields for configuration
     public float maxForwardSpeed = 10f; // Max speed the ship can reach
-    public float accelerationRate = 2f; // How quickly the ship accelerates
-    public float decelerationRate = 5f; // How quickly the ship decelerates
+    public float maxReverseSpeed = 5f; // Max speed in reverse
     public float maxTurnSpeed = 50f;
     public float bankAngle = 30f; // Maximum banking angle
     public float bankSpeed = 2f; // Speed of banking adjustment
@@ -16,7 +15,8 @@ public class ShipController : MonoBehaviour
     public float maxVolume = 1f;        // Maximum volume
 
     // Internal variables
-    private float currentForwardSpeed = 0f; // Tracks current speed
+    public float currentForwardSpeed = 0f; // Tracks current speed
+    private float targetForwardSpeed = 0f; // Target speed based on state
     private float currentBank = 0f;
     private Rigidbody rb;
 
@@ -28,6 +28,13 @@ public class ShipController : MonoBehaviour
     public float maxSternWakeSpeed = 1f; // Max speed for the stern wake
     public ParticleSystem bowWake; // Second particle system
     public float maxBowWakeSpeed = 10f; // Max speed for the bow wake
+
+    public enum SpeedState { Reverse, Stop, HalfForward, FullForward }
+    public SpeedState currentSpeedState = SpeedState.Stop;
+
+    // Internal variables
+    private float speedChangeCooldown = 0.5f; // Cooldown in seconds
+    private float nextSpeedChangeTime = 0f; // Tracks when the speed state can be updated next
 
     void Start()
     {
@@ -73,6 +80,7 @@ public class ShipController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         
         // Reset targets (if needed)
+        
         if (Input.GetKey(KeyCode.R)){
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
             foreach (GameObject target in targets){
@@ -80,18 +88,60 @@ public class ShipController : MonoBehaviour
                 targetScript.ResetTarget();
             }
         }
+        float currentTime = Time.time;
+        if (currentTime >= nextSpeedChangeTime)
+        {
+            // Forward movement
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                if ((int)currentSpeedState+1 < System.Enum.GetValues(typeof(SpeedState)).Length)
+                {
+                    currentSpeedState = (SpeedState)(((int)currentSpeedState + 1) % System.Enum.GetValues(typeof(SpeedState)).Length);
+                    nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                }
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                if ((int)currentSpeedState-1 >= 0) {
+                    currentSpeedState = (SpeedState)(((int)currentSpeedState - 1 + System.Enum.GetValues(typeof(SpeedState)).Length) % System.Enum.GetValues(typeof(SpeedState)).Length);
+                    nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                }
+            }
+            /*
+            else
+            {
+                // Gradually slow down when not accelerating
+                currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, 0f, Time.deltaTime * decelerationRate);
+            }
+            */
+        }
+        Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
+        switch (currentSpeedState)
+        {
+            case SpeedState.Reverse:
+                targetForwardSpeed = -1*maxReverseSpeed;
+                break;
+            case SpeedState.Stop:
+                targetForwardSpeed = 0f;
+                break;
+            case SpeedState.HalfForward:
+                targetForwardSpeed = maxForwardSpeed * 0.5f;
+                break;
+            case SpeedState.FullForward:
+                targetForwardSpeed = maxForwardSpeed;
+                break;
+        }
 
-        // Forward movement
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            // Gradually increase forward speed using an exponential-like curve
-            currentForwardSpeed += accelerationRate * (1 - currentForwardSpeed / maxForwardSpeed) * Time.deltaTime;
-        }
-        else
-        {
-            // Gradually slow down when not accelerating
-            currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, 0f, Time.deltaTime * decelerationRate);
-        }
+       // Exponential growth towards the target speed
+    float k = 0.1f; // Controls the steepness of the exponential curve
+    if (currentForwardSpeed > targetForwardSpeed) {
+        k = 0.5f;
+    }
+    currentForwardSpeed += (targetForwardSpeed - currentForwardSpeed) * (1 - Mathf.Exp(-k * Time.deltaTime));
+
+        // Prevent overshooting the target speed
+        currentForwardSpeed = Mathf.Clamp(currentForwardSpeed, -maxReverseSpeed, maxForwardSpeed);
+
 
         // Turning
         float turnInput = 0f;
@@ -145,6 +195,7 @@ public class ShipController : MonoBehaviour
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxForwardSpeed);
     }
 
+
     private void ApplyRockingEffect()
     {
         // Apply the rocking effect to the ship's roll (z-axis) without affecting the banking
@@ -175,14 +226,27 @@ public class ShipController : MonoBehaviour
         else {
             main2.startSpeed = 0;
         }
+
+        // Swap positions if moving backward
+        if (currentForwardSpeed < 0)
+        {
+            sternWake.transform.localPosition = new Vector3(0, 0, bowWake.transform.localPosition.z);
+            bowWake.transform.localPosition = new Vector3(0, 0, sternWake.transform.localPosition.z);
+        }
+        else
+        {
+            // Reset to default positions if moving forward
+            sternWake.transform.localPosition = new Vector3(0, 0, -5f); // Example position for stern wake
+            bowWake.transform.localPosition = new Vector3(0, 0, 5f);  // Example position for bow wake
+        }
     }
 
     private void AdjustAudioVolume()
-{
+    {
     if (shipAudioSource != null)
     {
         // Adjust the volume based on the current forward speed
         shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, currentForwardSpeed / maxForwardSpeed);
     }
-}
+    }
 }
