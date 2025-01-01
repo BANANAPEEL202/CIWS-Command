@@ -10,7 +10,7 @@ public class MissileSpawner : MonoBehaviour
 
     void Update()
     {
-        transform.position = ship.transform.position + new Vector3(2000, 0, 0);
+        transform.position = ship.transform.position + new Vector3(1500, 0, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Get all targets with the "Target" tag

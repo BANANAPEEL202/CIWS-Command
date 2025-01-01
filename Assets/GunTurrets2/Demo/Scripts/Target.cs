@@ -6,6 +6,7 @@ public class Target : MonoBehaviour
     public bool isAlive = true; // Flag to indicate whether the target is alive
     public GameObject fireEffect; // Reference to the fire GameObject
     public GameObject explosionPrefab;
+    public AudioSource fireAudioSource;
 
     void Start()
     {
@@ -51,8 +52,11 @@ public class Target : MonoBehaviour
     public void KillTarget()
     {
         isAlive = false;
-        
         Instantiate(explosionPrefab, transform.position, transform.rotation);
+        if (!fireAudioSource.isPlaying)
+        {
+            fireAudioSource.Play();
+        }
     }
 
     // Method to reset the target to its alive state (optional)

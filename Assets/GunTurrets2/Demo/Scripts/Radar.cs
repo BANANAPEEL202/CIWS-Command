@@ -9,7 +9,7 @@ public class Radar : MonoBehaviour
     public Transform ship; // The ship's transform
     public Transform radarBackground; // The radar's base transform
     public Transform playerCamera;
-    public float detectionRange = 2000f; // Maximum range of radar detection
+    public float detectionRange = 1500f; // Maximum range of radar detection
     public float beamAngle = 2f; // Beam angle in degrees
     public float rotationSpeed = -400; // Rotation speed in degrees per second
     private float radarRadius;
@@ -21,10 +21,21 @@ public class Radar : MonoBehaviour
 
     private float radarRotation = 0f; // Current rotation of the radar beam
 
+    public Target target;
+
 
     void Update()
     {
-        radarRadius = radarBackground.GetComponent<RectTransform>().rect.width / 2f - 15;
+        if (target.isAlive == false)
+        {
+            radarBeam.gameObject.SetActive(false);
+            radarBlips.gameObject.SetActive(false);
+        }
+        else {
+            radarBeam.gameObject.SetActive(true);
+            radarBlips.gameObject.SetActive(true);
+        }
+        radarRadius = radarBackground.GetComponent<RectTransform>().rect.width / 2f - 10;
 
         // Update the radar's rotation based on the ship's orientation
         Vector3 shipForward = ship.transform.forward;

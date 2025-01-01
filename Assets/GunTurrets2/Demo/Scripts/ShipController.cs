@@ -11,6 +11,7 @@ public class ShipController : MonoBehaviour
     public float drag = 0.1f; // Simulates air/water resistance
     public float rockingStrength = 1f; // Strength of the rocking effect
     public float rockingSpeed = 1f; // Speed of the rocking effect
+    public AudioSource bellAudioSource;
     public AudioSource shipAudioSource; // Reference to the AudioSource
     public float maxVolume = 1f;        // Maximum volume
 
@@ -98,6 +99,7 @@ public class ShipController : MonoBehaviour
                 {
                     currentSpeedState = (SpeedState)(((int)currentSpeedState + 1) % System.Enum.GetValues(typeof(SpeedState)).Length);
                     nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                    bellAudioSource.Play();
                 }
             }
             else if (Input.GetKey(KeyCode.DownArrow))
@@ -105,6 +107,7 @@ public class ShipController : MonoBehaviour
                 if ((int)currentSpeedState-1 >= 0) {
                     currentSpeedState = (SpeedState)(((int)currentSpeedState - 1 + System.Enum.GetValues(typeof(SpeedState)).Length) % System.Enum.GetValues(typeof(SpeedState)).Length);
                     nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                    bellAudioSource.Play();
                 }
             }
             /*
