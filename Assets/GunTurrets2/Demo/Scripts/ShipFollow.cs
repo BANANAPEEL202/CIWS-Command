@@ -12,8 +12,8 @@ public class ShipFollow : MonoBehaviour
     public float maxDistance = 200f;  // Maximum camera distance
     public Vector3 offset = new Vector3(0, 0, 5);  // Offset from the ship's center
 
-    private float currentHorizontalAngle = 0f;  // Horizontal angle around the ship
-    private float currentVerticalAngle = -15f;  // Vertical angle up/down
+    public float currentHorizontalAngle = 0f;  // Horizontal angle around the ship
+    public float currentVerticalAngle = -80f;  // Vertical angle up/down
 
     void Update()
     {

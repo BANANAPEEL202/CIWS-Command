@@ -80,6 +80,8 @@ namespace GT2
         /// </summary>
         public float AngleToTarget { get { return IsIdle ? 999f : angleToTarget; } }
 
+        public bool destroyed = false; 
+
         private void Awake()
         {
             hasBarrels = barrels != null;
@@ -89,6 +91,9 @@ namespace GT2
 
         private void Update()
         {
+            if (destroyed) {
+                return;
+            }
             if (IsIdle)
             {
                 if (!IsTurretAtRest)

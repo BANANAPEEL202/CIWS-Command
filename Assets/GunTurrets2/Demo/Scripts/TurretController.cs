@@ -15,6 +15,7 @@ namespace GT2.Demo
         [SerializeField] private float maxEngagementRange = 300f; // Maximum range to engage targets
         [SerializeField] private float minimumEngagementRange = 25; // Max dispersion angle in degrees
         [SerializeField] private float dispersion = 1.0f; // Max dispersion angle in degrees
+        [SerializeField] private Target Target;
 
         public Transform targetPoint = null;
         private Rigidbody targetRigidbody = null; // To track the target's velocity
@@ -38,6 +39,14 @@ namespace GT2.Demo
 
         private void Update()
         {
+            if (Target.isAlive == false)
+            {
+                TurretAim.destroyed = true;
+                return;
+            }
+            else {
+                TurretAim.destroyed = false;
+            }
             if (TurretAim == null || Bullet == null) {
                 fireCooldown = 1f;
                 return;
