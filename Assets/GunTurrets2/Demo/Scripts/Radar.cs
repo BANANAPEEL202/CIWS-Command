@@ -16,6 +16,7 @@ public class Radar : MonoBehaviour
 
     public GameObject radarBlipPrefab; // Blip prefab to represent objects on the radar
     public RectTransform radarBlips; // UI canvas to draw the blips on
+    public Transform cameraPOV;
     public float fadeDuration = 0.5f; // Duration for the blips to fade out
 
     private float radarRotation = 0f; // Current rotation of the radar beam
@@ -31,14 +32,16 @@ public class Radar : MonoBehaviour
         Vector3 cameraForward = playerCamera.transform.forward;
         cameraForward.y = 0; // Ignore vertical rotation
         float angle = Vector3.SignedAngle(shipForward, cameraForward, Vector3.up);
-        radarBackground.rotation = Quaternion.Euler(0, 0, angle);
-        radarBlips.rotation = Quaternion.Euler(0, 0, angle) ;
+        radarBackground.rotation = Quaternion.Euler(0, 0, 0);
+        radarBlips.rotation = Quaternion.Euler(0, 0, 0) ;
+
+        cameraPOV.rotation = Quaternion.Euler(0, 0, -angle);
 
         // Rotate the radar beam based on the rotation speed
         radarRotation += rotationSpeed * Time.deltaTime;
 
         // Apply the rotation to the radar beam
-        radarBeam.rotation = Quaternion.Euler(0, 0, angle + radarRotation);
+        radarBeam.rotation = Quaternion.Euler(0, 0, 0 + radarRotation);
 
         // radar beam 0 is -90 + -30 = -120 from front of ship (angle counter clockwise)
         float radarRotationFromFrontofShip = (radarRotation - 90 - 30)%360;
@@ -77,6 +80,7 @@ public class Radar : MonoBehaviour
                 // Start the fade-out coroutine
                 StartCoroutine(FadeOutBlip(blip));
             }
+
         }
     }
 
