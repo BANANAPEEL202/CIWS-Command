@@ -15,7 +15,7 @@ public class ShipCollider : MonoBehaviour
             {
                 target.KillTarget();
             }
-            Destroy(other.gameObject);
+            other.GetComponent<Missile>().DestroyMissile();
         }
     }
 }

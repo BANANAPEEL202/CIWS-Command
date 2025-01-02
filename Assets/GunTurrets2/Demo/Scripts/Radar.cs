@@ -35,7 +35,7 @@ public class Radar : MonoBehaviour
             radarBeam.gameObject.SetActive(true);
             radarBlips.gameObject.SetActive(true);
         }
-        radarRadius = radarBackground.GetComponent<RectTransform>().rect.width / 2f - 10;
+        radarRadius = radarBackground.GetComponent<RectTransform>().rect.width / 2f - 5;
 
         // Update the radar's rotation based on the ship's orientation
         Vector3 shipForward = ship.transform.forward;

@@ -21,6 +21,8 @@ public class Missile : MonoBehaviour
     private MissileState state = MissileState.LowFlight;
     private Vector3 randomOffset;
 
+    public ParticleSystem smokeTrail;
+
     private void Awake()
     {
         bulletPool = FindFirstObjectByType<BulletPool>();
@@ -99,10 +101,20 @@ public class Missile : MonoBehaviour
             }
             else
             {
-                Instantiate(explosionPrefab, transform.position, transform.rotation);
-                Destroy(gameObject);
+                DestroyMissile();
             }
         }
+    }
+
+    public void DestroyMissile()
+    {
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Vector3 originalScale = smokeTrail.transform.localScale;
+        smokeTrail.transform.SetParent(null, true);
+        smokeTrail.transform.localScale = originalScale;
+        smokeTrail.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        Destroy(smokeTrail.gameObject, smokeTrail.main.duration + smokeTrail.main.startLifetime.constantMax); // Cleanup after trail finishes
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
