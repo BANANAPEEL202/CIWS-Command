@@ -22,6 +22,7 @@ public class Radar : MonoBehaviour
     private float radarRotation = 0f; // Current rotation of the radar beam
 
     public Target target;
+    public AudioSource radarAudioSource;
 
 
     void Update()
@@ -87,7 +88,10 @@ public class Radar : MonoBehaviour
                 RectTransform blipRect = blip.GetComponent<RectTransform>();
                 blipRect.anchoredPosition = new Vector2(radarX, radarY);
 
-
+                if (radarAudioSource != null && !radarAudioSource.isPlaying)
+                {
+                    radarAudioSource.Play();
+                }
                 // Start the fade-out coroutine
                 StartCoroutine(FadeOutBlip(blip));
             }
