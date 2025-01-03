@@ -31,6 +31,7 @@ public class Radar : MonoBehaviour
         {
             radarBeam.gameObject.SetActive(false);
             radarBlips.gameObject.SetActive(false);
+            return;
         }
         else {
             radarBeam.gameObject.SetActive(true);

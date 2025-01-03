@@ -19,6 +19,7 @@ public class MissileSpawner : MonoBehaviour
     public float missileSpawnDelayMax = 1f;
 
     private bool isSpawning = false;
+    private int missileCount = 1;
 
     void Start()
     {
@@ -102,6 +103,8 @@ public class MissileSpawner : MonoBehaviour
 
             // Pass the target to the missile's script
             missile.GetComponent<Missile>().target = randomTarget;
+            missile.GetComponent<Missile>().number = missileCount;
+            missileCount++;
         }
     }
 }

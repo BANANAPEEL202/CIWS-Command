@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -7,6 +8,8 @@ public class Target : MonoBehaviour
     public GameObject fireEffect; // Reference to the fire GameObject
     public GameObject explosionPrefab;
     public AudioSource fireAudioSource;
+    public String targetName;
+    private EventLog eventLog;
 
     void Start()
     {
@@ -15,6 +18,7 @@ public class Target : MonoBehaviour
         {
             fireEffect.SetActive(false);
         }
+        eventLog = FindFirstObjectByType<EventLog>();
     }
 
     void Update()
@@ -51,6 +55,9 @@ public class Target : MonoBehaviour
     // Method to simulate the target being killed (can be called from other scripts)
     public void KillTarget()
     {
+        if (isAlive) {
+            eventLog.AddLog(targetName + " destroyed", Color.red);
+        }
         isAlive = false;
         Instantiate(explosionPrefab, transform.position, transform.rotation);
         if (!fireAudioSource.isPlaying)

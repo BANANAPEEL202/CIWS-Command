@@ -23,6 +23,10 @@ public class Missile : MonoBehaviour
 
     public ParticleSystem smokeTrail;
 
+    public int number;
+
+    private EventLog eventLog;
+
     private void Awake()
     {
         bulletPool = FindFirstObjectByType<BulletPool>();
@@ -36,6 +40,7 @@ public class Missile : MonoBehaviour
             0,
             Random.Range(-10f, 10f)
         );
+        eventLog = FindFirstObjectByType<EventLog>();
     }
 
     private void Update()
@@ -101,6 +106,7 @@ public class Missile : MonoBehaviour
             }
             else
             {
+                eventLog.AddLog("Missile " + number.ToString("D3") + " intercepted", Color.white);
                 DestroyMissile();
             }
         }
@@ -113,7 +119,7 @@ public class Missile : MonoBehaviour
         smokeTrail.transform.SetParent(null, true);
         smokeTrail.transform.localScale = originalScale;
         smokeTrail.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-        Destroy(smokeTrail.gameObject, smokeTrail.main.duration + smokeTrail.main.startLifetime.constantMax); // Cleanup after trail finishes
+        Destroy(smokeTrail.gameObject, smokeTrail.main.duration + smokeTrail.main.startLifetime.constantMax); // Cleanup after trail finishe
         Destroy(gameObject);
     }
 
