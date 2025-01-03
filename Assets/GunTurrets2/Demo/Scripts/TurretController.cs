@@ -42,6 +42,7 @@ namespace GT2.Demo
             if (Target.isAlive == false)
             {
                 TurretAim.destroyed = true;
+                StopFiringSound();
                 return;
             }
             else {
