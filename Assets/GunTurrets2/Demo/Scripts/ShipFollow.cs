@@ -16,6 +16,11 @@ public class ShipFollow : MonoBehaviour
     public float currentHorizontalAngle = 0f;  // Horizontal angle around the ship
     public float currentVerticalAngle = -80f;  // Vertical angle up/down
 
+    // Camera Shake Variables
+    private bool isShaking = false;
+    private float shakeDuration = 0f;
+    private float shakeIntensity = 0f;
+
     void Update()
     {
         // Get mouse input
@@ -33,23 +38,50 @@ public class ShipFollow : MonoBehaviour
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         if (scrollInput != 0)
         {
-            // Adjust the distance based on the scroll wheel input
-            distance -= scrollInput * 20f;  // Adjust the factor (20f) for scroll speed sensitivity
-            distance = Mathf.Clamp(distance, minDistance, maxDistance);  // Clamp the distance to a valid range
+            distance -= scrollInput * 20f;
+            distance = Mathf.Clamp(distance, minDistance, maxDistance);
         }
 
         // Calculate the new camera position, taking into account the ship's rotation and offset
-        Vector3 shipPositionWithOffset = ship.position + ship.rotation * offset;  // Offset relative to ship's rotation
+        Vector3 shipPositionWithOffset = ship.position + ship.rotation * offset;
 
-        // Calculate the new camera position
         float x = shipPositionWithOffset.x + distance * Mathf.Sin(currentVerticalAngle * Mathf.Deg2Rad) * Mathf.Sin(currentHorizontalAngle * Mathf.Deg2Rad);
         float y = math.max(5, shipPositionWithOffset.y + distance * Mathf.Cos(currentVerticalAngle * Mathf.Deg2Rad));
         float z = shipPositionWithOffset.z + distance * Mathf.Sin(currentVerticalAngle * Mathf.Deg2Rad) * Mathf.Cos(currentHorizontalAngle * Mathf.Deg2Rad);
 
+        Vector3 finalPosition = new Vector3(x, y, z);
+
+        // Apply shake effect if active
+        if (isShaking)
+        {
+            finalPosition += UnityEngine.Random.insideUnitSphere * shakeIntensity;
+        }
+
         // Set the camera's position
-        transform.position = new Vector3(x, y, z);
-        
-        // Make the camera look at the ship, adjusted for the offset
+        transform.position = finalPosition;
+
+        // Make the camera look at the ship
         transform.LookAt(shipPositionWithOffset);
+    }
+
+    public void ShakeCamera(float duration, float intensity)
+    {
+        shakeDuration = duration;
+        shakeIntensity = intensity;
+        if (!isShaking)
+        {
+            StartCoroutine(ShakeCoroutine());
+        }
+    }
+
+    private System.Collections.IEnumerator ShakeCoroutine()
+    {
+        isShaking = true;
+        while (shakeDuration > 0)
+        {
+            shakeDuration -= Time.deltaTime;
+            yield return null;
+        }
+        isShaking = false;
     }
 }
