@@ -23277,3 +23277,337 @@ Memory consumption went from 206.3 MB to 201.7 MB.
 Total: 9.643334 ms (FindLiveObjects: 0.367000 ms CreateObjectMapping: 0.247375 ms MarkObjects: 7.277666 ms  DeleteObjects: 1.751084 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 56897.136647 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3
+  artifactKey: Guid(d6ed1c284f7a84184baade9018a5d28b)
+Start importing Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3 using Guid(d6ed1c284f7a84184baade9018a5d28b) (AudioImporter) -> (artifact id: 'c4e4888b274ba2a0789914b3ae34e4c8') in 0.09784025 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.116011 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3
+  artifactKey: Guid(d6ed1c284f7a84184baade9018a5d28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3 using Guid(d6ed1c284f7a84184baade9018a5d28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'aaf61bc0accbbe565e0719b5008b5222') in 0.117733 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.824790 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/ShipExplosion.mp3
+  artifactKey: Guid(b6b5dfc98610e4d68a8144dfc35dacef)
+Start importing Assets/GunTurrets2/Demo/Audio/ShipExplosion.mp3 using Guid(b6b5dfc98610e4d68a8144dfc35dacef) (AudioImporter) -> (artifact id: '1e034ca3008bf5af0d2610c434a63206') in 0.048196209 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013195 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/ShipExplosion.mp3
+  artifactKey: Guid(b6b5dfc98610e4d68a8144dfc35dacef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/ShipExplosion.mp3 using Guid(b6b5dfc98610e4d68a8144dfc35dacef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3e9fff8d329e9ce3466b10c70c430534') in 0.005135792 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.660011 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Fire Sound.mp3
+  artifactKey: Guid(f11188152d423466b9eb7e3869a7adcd)
+Start importing Assets/GunTurrets2/Demo/Audio/Fire Sound.mp3 using Guid(f11188152d423466b9eb7e3869a7adcd) (AudioImporter) -> (artifact id: '5aa8697f1355d1bd3c920e62153fddc0') in 0.649436291 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019937 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Fire Sound.mp3
+  artifactKey: Guid(f11188152d423466b9eb7e3869a7adcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Fire Sound.mp3 using Guid(f11188152d423466b9eb7e3869a7adcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dbbadfcdc9cbe173c09de61b5806bf6e') in 0.004063333 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.301249 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Engine Change Sound.mp3
+  artifactKey: Guid(483336194354a48bebc3cdbb8a056f18)
+Start importing Assets/GunTurrets2/Demo/Audio/Engine Change Sound.mp3 using Guid(483336194354a48bebc3cdbb8a056f18) (AudioImporter) -> (artifact id: 'bdc5d118b545a3658cfd50a0e28e0748') in 0.027330875 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.011419 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Engine Change Sound.mp3
+  artifactKey: Guid(483336194354a48bebc3cdbb8a056f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Engine Change Sound.mp3 using Guid(483336194354a48bebc3cdbb8a056f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '50f3a6f010ad0d2cd7f8d355d001734c') in 0.004144125 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.956585 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3
+  artifactKey: Guid(d6ed1c284f7a84184baade9018a5d28b)
+Start importing Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3 using Guid(d6ed1c284f7a84184baade9018a5d28b) (AudioImporter) -> (artifact id: '1b50cc6e8d2a345b347620d6e9467d55') in 0.049891583 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.010818 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3
+  artifactKey: Guid(d6ed1c284f7a84184baade9018a5d28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Sonar Ping.mp3 using Guid(d6ed1c284f7a84184baade9018a5d28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '205e47b5484d7c2bd9c630c3fe21f18f') in 0.004368459 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16ef23000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.730 seconds
+Refreshing native plugins compatible for Editor in 0.96 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.05 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.683 seconds
+Domain Reload Profiling: 1416ms
+	BeginReloadAssembly (223ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (88ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (433ms)
+		LoadAssemblies (386ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (127ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (105ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (684ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (569ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (94ms)
+			ProcessInitializeOnLoadAttributes (324ms)
+			ProcessInitializeOnLoadMethodAttributes (143ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.14 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5081 unused Assets / (5.7 MB). Loaded Objects now: 6389.
+Memory consumption went from 206.3 MB to 200.6 MB.
+Total: 9.562792 ms (FindLiveObjects: 0.351458 ms CreateObjectMapping: 0.205417 ms MarkObjects: 7.179083 ms  DeleteObjects: 1.826542 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16ef23000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.719 seconds
+Refreshing native plugins compatible for Editor in 5.49 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.01 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.707 seconds
+Domain Reload Profiling: 1428ms
+	BeginReloadAssembly (239ms)
+		ExecutionOrderSort (1ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (94ms)
+	RebuildCommonClasses (29ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (403ms)
+		LoadAssemblies (377ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (119ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (102ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (708ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (591ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (98ms)
+			ProcessInitializeOnLoadAttributes (335ms)
+			ProcessInitializeOnLoadMethodAttributes (150ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.15 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5081 unused Assets / (5.4 MB). Loaded Objects now: 6391.
+Memory consumption went from 206.3 MB to 200.8 MB.
+Total: 10.377167 ms (FindLiveObjects: 0.369542 ms CreateObjectMapping: 0.274166 ms MarkObjects: 7.632083 ms  DeleteObjects: 2.100833 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16ef23000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.708 seconds
+Refreshing native plugins compatible for Editor in 6.86 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.01 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.687 seconds
+Domain Reload Profiling: 1397ms
+	BeginReloadAssembly (239ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (102ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (394ms)
+		LoadAssemblies (359ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (116ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (100ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (687ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (572ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (99ms)
+			ProcessInitializeOnLoadAttributes (319ms)
+			ProcessInitializeOnLoadMethodAttributes (145ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (2ms)
+Refreshing native plugins compatible for Editor in 1.11 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5081 unused Assets / (5.2 MB). Loaded Objects now: 6393.
+Memory consumption went from 206.3 MB to 201.1 MB.
+Total: 10.019208 ms (FindLiveObjects: 0.365709 ms CreateObjectMapping: 0.264458 ms MarkObjects: 7.394000 ms  DeleteObjects: 1.994667 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 655.784460 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3
+  artifactKey: Guid(7bfbbf11565314963981189a12493a59)
+Start importing Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3 using Guid(7bfbbf11565314963981189a12493a59) (AudioImporter)Errors during import of AudioClip Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3:
+FSBTool ERROR: The format of the source file is invalid, see output for details.
+FSBTool ERROR: Internal error from FMOD sub-system.
+ -> (artifact id: '98ebc3e102a54c6a6465b2c2a305846a') in 0.320587041 seconds
+  ERROR: Import of 'Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3' had errors: Errors during import of AudioClip Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3:
+FSBTool ERROR: The format of the source file is invalid, see output for details.
+FSBTool ERROR: Internal error from FMOD sub-system.
+
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 84.109823 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3
+  artifactKey: Guid(8248e6402905044a58006a4182b8159c)
+Start importing Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3 using Guid(8248e6402905044a58006a4182b8159c) (AudioImporter)Warnings during import of AudioClip Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3
+FSBTool WARNING: This source file was truncated.  Length reported 78336 bytes, length decoded = 73728 bytes.
+
+ -> (artifact id: 'd0c4cc36ef9263d9813e02609a0802ec') in 0.037980583 seconds
+  ERROR: Import of 'Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3' had errors: Warnings during import of AudioClip Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3
+FSBTool WARNING: This source file was truncated.  Length reported 78336 bytes, length decoded = 73728 bytes.
+
+
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.064837 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3
+  artifactKey: Guid(8248e6402905044a58006a4182b8159c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Radar Ping 1.mp3 using Guid(8248e6402905044a58006a4182b8159c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e3dfb3070b738a449604e8b25b35c89b') in 0.123604541 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.439369 seconds.
+  path: Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3
+  artifactKey: Guid(7bfbbf11565314963981189a12493a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GunTurrets2/Demo/Audio/Radar Ping.mp3 using Guid(7bfbbf11565314963981189a12493a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ff9a46f323c39888a9f39af44a33c756') in 0.001774084 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x16ef23000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  1.056 seconds
+Refreshing native plugins compatible for Editor in 2.28 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 2 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.778 seconds
+Domain Reload Profiling: 1837ms
+	BeginReloadAssembly (472ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (294ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (503ms)
+		LoadAssemblies (438ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (157ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (137ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (779ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (656ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (104ms)
+			ProcessInitializeOnLoadAttributes (353ms)
+			ProcessInitializeOnLoadMethodAttributes (191ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (3ms)
+Refreshing native plugins compatible for Editor in 1.13 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5081 unused Assets / (4.1 MB). Loaded Objects now: 6395.
+Memory consumption went from 210.4 MB to 206.3 MB.
+Total: 9.673459 ms (FindLiveObjects: 0.342834 ms CreateObjectMapping: 0.258167 ms MarkObjects: 7.228416 ms  DeleteObjects: 1.843500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
