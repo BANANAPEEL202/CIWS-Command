@@ -26,6 +26,7 @@ namespace GT2.Demo
 
         private void Awake()
         {
+            Application.targetFrameRate = 30;
             if (TurretAim == null)
                 Debug.LogError(name + ": TurretController not assigned a TurretAim!");
             if (Bullet == null)
@@ -93,6 +94,25 @@ namespace GT2.Demo
                     // Fire as many shots as needed for the accumulated cooldown
                     while (fireCooldown <= 0f)
                     {
+                        if (distance < 50)
+                        {
+                            randomRotation = Quaternion.Euler(
+                                Random.Range(-dispersion, dispersion),
+                                Random.Range(-dispersion, dispersion),
+                                Random.Range(-dispersion, dispersion));
+                        }
+                        else
+                        {
+                            randomOffset = new Vector3(
+                                Random.Range(-dispersion, dispersion),
+                                Random.Range(-dispersion, dispersion),
+                                Random.Range(-dispersion, dispersion));
+                        }
+                        predictedPosition += randomOffset;
+
+                        aimDirection = predictedPosition - TurretAim.transform.position;
+                        aimDirection = randomRotation * aimDirection;
+                        TurretAim.AimPosition = TurretAim.transform.position + aimDirection;
                         Shoot();
                         fireCooldown += 1f / fireRate; // Accumulate for the next shot
 
