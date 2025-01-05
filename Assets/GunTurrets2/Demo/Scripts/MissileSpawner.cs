@@ -32,10 +32,12 @@ public class MissileSpawner : MonoBehaviour
         transform.position = ship.transform.position + new Vector3(1500, 0, 0);
 
         // Allow manual missile spawning by pressing Space
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SpawnMissile();
         }
+        */
     }
 
     IEnumerator SpawnWaves()

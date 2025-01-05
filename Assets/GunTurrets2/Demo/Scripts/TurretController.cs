@@ -59,10 +59,11 @@ namespace GT2.Demo
                 Debug.LogError(name + ": TurretController not assigned a SoundController!");
                 soundController = GetComponent<SoundController>();
             }
-            
+            /*
             if (Input.GetMouseButtonDown(0)) {
                 TurretAim.IsIdle = !TurretAim.IsIdle;
             }
+            */
             if (TurretAim.IsIdle) {
                 StopFiringSound();
                 return;

@@ -39,6 +39,8 @@ public class ShipController : MonoBehaviour
 
     public int missileCount = 1;
 
+    public GameOver gameOverController;
+
     void Start()
     {
         // Get or add a Rigidbody to the ship
@@ -72,6 +74,14 @@ public class ShipController : MonoBehaviour
     void Update()
     {
         // Handle input and adjust orientation
+        if (gameOverController != null && gameOverController.gameOver == true)
+        {
+            currentSpeedState = SpeedState.Stop;
+            HandleInput();
+            AdjustParticleSpeed();
+            AdjustAudioVolume();
+            return;
+        }
         HandleInput();
         ApplyRockingEffect();
         AdjustParticleSpeed();
@@ -81,9 +91,8 @@ public class ShipController : MonoBehaviour
     private void HandleInput()
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        
+        /*
         // Reset targets (if needed)
-        
         if (Input.GetKey(KeyCode.R)){
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
             foreach (GameObject target in targets){
@@ -91,8 +100,9 @@ public class ShipController : MonoBehaviour
                 targetScript.ResetTarget();
             }
         }
+        */
         float currentTime = Time.time;
-        if (currentTime >= nextSpeedChangeTime)
+        if (currentTime >= nextSpeedChangeTime && gameOverController != null && !gameOverController.gameOver)
         {
             // Forward movement
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
@@ -146,7 +156,7 @@ public class ShipController : MonoBehaviour
 
         // Prevent overshooting the target speed
         currentForwardSpeed = Mathf.Clamp(currentForwardSpeed, -maxReverseSpeed, maxForwardSpeed);
-        Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
+        //Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
 
         // Turning
         float turnInput = 0f;
@@ -159,7 +169,7 @@ public class ShipController : MonoBehaviour
             turnInput = 1f;
         }
 
-        if (turnInput != 0f)
+        if (turnInput != 0f && gameOverController != null &&  gameOverController.gameOver == false)
         {
             // Scale turn speed by current velocity magnitude
             float currentSpeed = rb.linearVelocity.magnitude;

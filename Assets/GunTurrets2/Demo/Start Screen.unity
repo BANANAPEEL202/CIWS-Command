@@ -6434,6 +6434,11 @@ PrefabInstance:
       objectReference: {fileID: 818603230}
     - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
+        type: 3}
       propertyPath: bulletPool
       value: 
       objectReference: {fileID: 0}
@@ -24106,6 +24111,7 @@ GameObject:
   - component: {fileID: 1855903068}
   - component: {fileID: 1855903073}
   - component: {fileID: 1855903072}
+  - component: {fileID: 1855903074}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -24223,6 +24229,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1a8e5a287864204ad9fea19eb81e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverController: {fileID: 0}
+--- !u!114 &1855903074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855903067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1a8e5a287864204ad9fea19eb81e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverController: {fileID: 0}
 --- !u!4 &1861164600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c2391e8a6bdf5424194b61e41952a40a,
@@ -24503,6 +24523,8 @@ MonoBehaviour:
   bowWake: {fileID: 470639597}
   maxBowWakeSpeed: 5
   currentSpeedState: 1
+  missileCount: 1
+  gameOverController: {fileID: 0}
 --- !u!54 &2025717778
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25309,6 +25331,11 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 977757265}
+    - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
         type: 3}
       propertyPath: bulletPool
