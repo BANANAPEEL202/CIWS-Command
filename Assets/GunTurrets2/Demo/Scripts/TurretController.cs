@@ -26,7 +26,7 @@ namespace GT2.Demo
 
         private void Awake()
         {
-            Application.targetFrameRate = 30;
+            Application.targetFrameRate = 60;
             if (TurretAim == null)
                 Debug.LogError(name + ": TurretController not assigned a TurretAim!");
             if (Bullet == null)
