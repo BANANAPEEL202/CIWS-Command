@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 7762812518593646155, guid: 064366caf3e804f83987e0d3b08e5321,
     type: 3}
-  health: 3
+  health: 5
   target: {fileID: 0}
   rotationSpeed: 10
   missileSpeed: 90

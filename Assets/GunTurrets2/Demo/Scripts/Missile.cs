@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 public class Missile : MonoBehaviour
@@ -22,9 +23,6 @@ public class Missile : MonoBehaviour
     private Vector3 randomOffset;
 
     public ParticleSystem smokeTrail;
-
-    public int number;
-
     private EventLog eventLog;
 
     private void Awake()
@@ -106,6 +104,8 @@ public class Missile : MonoBehaviour
             }
             else
             {
+                int number = FindFirstObjectByType<ShipController>().missileCount; 
+                FindFirstObjectByType<ShipController>().missileCount+=1;
                 eventLog.AddLog("Missile " + number.ToString("D3") + " intercepted", Color.white);
                 DestroyMissile();
             }

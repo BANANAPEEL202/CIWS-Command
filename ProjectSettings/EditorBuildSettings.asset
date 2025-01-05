@@ -4,4 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GunTurrets2/Demo/Start Screen.unity
+    guid: ca9be411d33a9481983c0323746544ba
+  - enabled: 1
+    path: Assets/GunTurrets2/Demo/Game.unity
+    guid: f335d78b8e839db4f88deefd55fcb7b8
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

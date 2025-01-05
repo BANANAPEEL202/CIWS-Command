@@ -5,7 +5,7 @@ public class BulletTracer : MonoBehaviour
     [Header("Tracer Settings")]
     [SerializeField] private float tracerDuration = 0.2f; // Duration of the tracer
     [SerializeField] private Color tracerColor = Color.red; // Color of the tracer
-    [SerializeField] private float tracerWidth = 0.1f; // Width of the tracer line
+    [SerializeField] private float tracerWidth = 0.2f; // Width of the tracer line
     [SerializeField] private LineRenderer lineRenderer; // LineRenderer component
     private float tracerTimer;
 

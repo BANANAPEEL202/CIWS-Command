@@ -31,7 +31,6 @@ public class Radar : MonoBehaviour
         {
             radarBeam.gameObject.SetActive(false);
             radarBlips.gameObject.SetActive(false);
-            return;
         }
         else {
             radarBeam.gameObject.SetActive(true);
@@ -62,41 +61,43 @@ public class Radar : MonoBehaviour
         // Find all game objects with the "Missile" tag
         GameObject[] missiles = GameObject.FindGameObjectsWithTag("Missile");
 
-        // For each missile, check if it is within the radar's beam angle
-        foreach (GameObject missile in missiles)
-        {
-            // Get the direction to the missile from the ship
-            Vector3 missileDirection = missile.transform.position - ship.position;
-            missileDirection.y = 0; // Ignore vertical direction
-
-            // Get the angle between the ship's forward direction and the missile's direction
-            // use vector3.down to get counter clockwise angle
-            float missileAngle = Vector3.SignedAngle(shipForward, missileDirection, Vector3.down);
-            float missileDistance = missileDirection.magnitude;
-
-            // Calculate the absolute difference between the angles
-            float angleDifference = Mathf.Abs(Mathf.DeltaAngle(radarRotationFromFrontofShip, missileAngle));
-            //Debug.Log("Radar Rotation: " + radarRotationFromFrontofShip + " | Missile Angle: " + missileAngle + " | Angle Difference: " + angleDifference);
-            if (angleDifference <= beamAngle / 2f && missileDistance <= detectionRange)
+        if (target.isAlive == true) {
+            // For each missile, check if it is within the radar's beam angle
+            foreach (GameObject missile in missiles)
             {
-                // Calculate the position of the blip on the radar (2D)
-                float radarAngle = Mathf.Deg2Rad * (radarRotationFromFrontofShip+90);
-                float radarX = missileDistance/detectionRange * radarRadius * Mathf.Cos(radarAngle) + 5 * Mathf.Cos(radarAngle);
-                float radarY = missileDistance/detectionRange * radarRadius * Mathf.Sin(radarAngle) + 5 * Mathf.Sin(radarAngle);
+                // Get the direction to the missile from the ship
+                Vector3 missileDirection = missile.transform.position - ship.position;
+                missileDirection.y = 0; // Ignore vertical direction
 
-                // Create a blip on the radar UI
-                GameObject blip = Instantiate(radarBlipPrefab, radarBlips);
-                RectTransform blipRect = blip.GetComponent<RectTransform>();
-                blipRect.anchoredPosition = new Vector2(radarX, radarY);
+                // Get the angle between the ship's forward direction and the missile's direction
+                // use vector3.down to get counter clockwise angle
+                float missileAngle = Vector3.SignedAngle(shipForward, missileDirection, Vector3.down);
+                float missileDistance = missileDirection.magnitude;
 
-                if (radarAudioSource != null && !radarAudioSource.isPlaying)
+                // Calculate the absolute difference between the angles
+                float angleDifference = Mathf.Abs(Mathf.DeltaAngle(radarRotationFromFrontofShip, missileAngle));
+                //Debug.Log("Radar Rotation: " + radarRotationFromFrontofShip + " | Missile Angle: " + missileAngle + " | Angle Difference: " + angleDifference);
+                if (angleDifference <= beamAngle / 2f && missileDistance <= detectionRange)
                 {
-                    radarAudioSource.Play();
-                }
-                // Start the fade-out coroutine
-                StartCoroutine(FadeOutBlip(blip));
-            }
+                    // Calculate the position of the blip on the radar (2D)
+                    float radarAngle = Mathf.Deg2Rad * (radarRotationFromFrontofShip+90);
+                    float radarX = missileDistance/detectionRange * radarRadius * Mathf.Cos(radarAngle) + 5 * Mathf.Cos(radarAngle);
+                    float radarY = missileDistance/detectionRange * radarRadius * Mathf.Sin(radarAngle) + 5 * Mathf.Sin(radarAngle);
 
+                    // Create a blip on the radar UI
+                    GameObject blip = Instantiate(radarBlipPrefab, radarBlips);
+                    RectTransform blipRect = blip.GetComponent<RectTransform>();
+                    blipRect.anchoredPosition = new Vector2(radarX, radarY);
+
+                    if (radarAudioSource != null && !radarAudioSource.isPlaying)
+                    {
+                        radarAudioSource.Play();
+                    }
+                    // Start the fade-out coroutine
+                    StartCoroutine(FadeOutBlip(blip));
+                }
+
+            }
         }
     }
 
