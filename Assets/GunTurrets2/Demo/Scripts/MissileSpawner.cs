@@ -11,15 +11,14 @@ public class MissileSpawner : MonoBehaviour
 
     // Wave configuration
     public float initialDelay = 5f;  // First wave delay in seconds
-    public float waveIntervalMin = 10f;  // Minimum time between waves
-    public float waveIntervalMax = 14f;  // Maximum time between waves
+    public float waveIntervalMin = 15f;  // Minimum time between waves
+    public float waveIntervalMax = 20f;  // Maximum time between waves
     public int minMissilesPerWave = 4;
-    public int maxMissilesPerWave = 8;
-    public float missileSpawnDelayMin = 0.3f;
-    public float missileSpawnDelayMax = 1f;
+    public int maxMissilesPerWave = 10;
+    public float missileSpawnDelayMin = 0.2f;
+    public float missileSpawnDelayMax = 0.8f;
 
     private bool isSpawning = false;
-    private int missileCount = 1;
 
     void Start()
     {
@@ -103,8 +102,6 @@ public class MissileSpawner : MonoBehaviour
 
             // Pass the target to the missile's script
             missile.GetComponent<Missile>().target = randomTarget;
-            missile.GetComponent<Missile>().number = missileCount;
-            missileCount++;
         }
     }
 }

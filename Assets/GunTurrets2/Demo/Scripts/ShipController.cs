@@ -37,6 +37,8 @@ public class ShipController : MonoBehaviour
     private float speedChangeCooldown = 0.5f; // Cooldown in seconds
     private float nextSpeedChangeTime = 0f; // Tracks when the speed state can be updated next
 
+    public int missileCount = 1;
+
     void Start()
     {
         // Get or add a Rigidbody to the ship
@@ -93,7 +95,7 @@ public class ShipController : MonoBehaviour
         if (currentTime >= nextSpeedChangeTime)
         {
             // Forward movement
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 if ((int)currentSpeedState+1 < System.Enum.GetValues(typeof(SpeedState)).Length)
                 {
@@ -102,7 +104,7 @@ public class ShipController : MonoBehaviour
                     bellAudioSource.Play();
                 }
             }
-            else if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
                 if ((int)currentSpeedState-1 >= 0) {
                     currentSpeedState = (SpeedState)(((int)currentSpeedState - 1 + System.Enum.GetValues(typeof(SpeedState)).Length) % System.Enum.GetValues(typeof(SpeedState)).Length);
@@ -118,7 +120,7 @@ public class ShipController : MonoBehaviour
             }
             */
         }
-        //Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
+
         switch (currentSpeedState)
         {
             case SpeedState.Reverse:
@@ -144,15 +146,15 @@ public class ShipController : MonoBehaviour
 
         // Prevent overshooting the target speed
         currentForwardSpeed = Mathf.Clamp(currentForwardSpeed, -maxReverseSpeed, maxForwardSpeed);
-
+        Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
 
         // Turning
         float turnInput = 0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             turnInput = -1f;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             turnInput = 1f;
         }
@@ -231,6 +233,7 @@ public class ShipController : MonoBehaviour
         }
 
         // Swap positions if moving backward
+        /*
         if (currentForwardSpeed < 0)
         {
             sternWake.transform.localPosition = new Vector3(0, 0, bowWake.transform.localPosition.z);
@@ -242,6 +245,7 @@ public class ShipController : MonoBehaviour
             sternWake.transform.localPosition = new Vector3(0, 0, -5f); // Example position for stern wake
             bowWake.transform.localPosition = new Vector3(0, 0, 5f);  // Example position for bow wake
         }
+        */
     }
 
     private void AdjustAudioVolume()

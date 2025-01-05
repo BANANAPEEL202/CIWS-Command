@@ -49,7 +49,6 @@ namespace GT2.Demo
                 TurretAim.destroyed = false;
             }
             if (TurretAim == null || Bullet == null) {
-                fireCooldown = 1f;
                 return;
             }
             if (bulletPool == null){
@@ -117,6 +116,8 @@ namespace GT2.Demo
                 // Reset aim position
                 TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
                 StopFiringSound();
+                fireCooldown = 1f / fireRate;
+                TurretAim.isAimed = false;
             }
         }
 
