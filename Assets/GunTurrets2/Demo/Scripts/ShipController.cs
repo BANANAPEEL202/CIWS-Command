@@ -37,6 +37,10 @@ public class ShipController : MonoBehaviour
     private float speedChangeCooldown = 0.5f; // Cooldown in seconds
     private float nextSpeedChangeTime = 0f; // Tracks when the speed state can be updated next
 
+    
+    private float turnInput = 0f; // Store input for turning
+    private float currentTurnSpeed = 0f; // Store calculated turn speed
+
     public int missileCount = 1;
 
     public GameOver gameOverController;
@@ -131,16 +135,15 @@ public class ShipController : MonoBehaviour
                 break;
         }
 
-        float k = 0.1f;
-        if (currentForwardSpeed > targetForwardSpeed)
+        float k = 0.2f;
+        if (currentForwardSpeed > targetForwardSpeed && targetForwardSpeed >= 0)
         {
             k = 0.5f;
         }
         currentForwardSpeed += (targetForwardSpeed - currentForwardSpeed) * (1 - Mathf.Exp(-k * Time.deltaTime));
-
         currentForwardSpeed = Mathf.Clamp(currentForwardSpeed, -maxReverseSpeed, maxForwardSpeed);
 
-        float turnInput = 0f;
+        // Capture turn input
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             turnInput = -1f;
@@ -149,28 +152,16 @@ public class ShipController : MonoBehaviour
         {
             turnInput = 1f;
         }
-
-        if (turnInput != 0f && gameOverController != null && !gameOverController.gameOver)
-        {
-            float currentSpeed = rb.linearVelocity.magnitude;
-            float turnSpeed = Mathf.Lerp(0, maxTurnSpeed, currentSpeed / maxForwardSpeed);
-
-            Vector3 offsetPosition = transform.position - transform.forward * 2f;
-            Vector3 turnForce = -1 * transform.right * turnInput * turnSpeed;
-            turnForce.y = 0;
-            offsetPosition.y = transform.position.y;
-
-            rb.AddForceAtPosition(turnForce, offsetPosition, ForceMode.Force);
-            rb.AddForce(transform.forward * (currentForwardSpeed * 0.8f), ForceMode.Acceleration);
-        }
         else
         {
-            rb.AddForce(transform.forward * currentForwardSpeed, ForceMode.Acceleration);
+            turnInput = 0f;
         }
 
+        // Calculate the target bank angle based on turn input
         float targetBank = turnInput * -bankAngle;
         currentBank = Mathf.Lerp(currentBank, targetBank, bankSpeed * Time.deltaTime);
 
+        // Apply banking angle
         Vector3 localEulerAngles = transform.localEulerAngles;
         localEulerAngles.z = currentBank;
         transform.localEulerAngles = localEulerAngles;
@@ -178,9 +169,25 @@ public class ShipController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Apply forward force
+        rb.AddForce(transform.forward * currentForwardSpeed, ForceMode.Acceleration);
+
+        // Apply turning force only when there is input
+        if (turnInput != 0f && gameOverController != null && !gameOverController.gameOver)
+        {
+            float currentSpeed = rb.linearVelocity.magnitude;
+            currentTurnSpeed = Mathf.Lerp(0, maxTurnSpeed, currentSpeed / maxForwardSpeed);
+
+            Vector3 offsetPosition = transform.position - transform.forward * 2f;
+            Vector3 turnForce = -1 * transform.right * turnInput * currentTurnSpeed * Time.fixedDeltaTime;
+            turnForce.y = 0;
+
+            rb.AddForceAtPosition(turnForce, offsetPosition, ForceMode.Force);
+        }
+
+        // Clamp velocity to max forward speed
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxForwardSpeed);
     }
-
     private void ApplyRockingEffect()
     {
         float rockingRoll = Mathf.Sin(Time.time * rockingSpeed + offset) * rockingStrength;
