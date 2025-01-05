@@ -73,8 +73,7 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
-        // Handle input and adjust orientation
-        if (gameOverController != null && gameOverController.gameOver == true)
+        if (gameOverController != null && gameOverController.gameOver)
         {
             currentSpeedState = SpeedState.Stop;
             HandleInput();
@@ -82,6 +81,7 @@ public class ShipController : MonoBehaviour
             AdjustAudioVolume();
             return;
         }
+
         HandleInput();
         ApplyRockingEffect();
         AdjustParticleSpeed();
@@ -91,50 +91,34 @@ public class ShipController : MonoBehaviour
     private void HandleInput()
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        /*
-        // Reset targets (if needed)
-        if (Input.GetKey(KeyCode.R)){
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
-            foreach (GameObject target in targets){
-                Target targetScript = target.GetComponent<Target>();
-                targetScript.ResetTarget();
-            }
-        }
-        */
+
         float currentTime = Time.time;
         if (currentTime >= nextSpeedChangeTime && gameOverController != null && !gameOverController.gameOver)
         {
-            // Forward movement
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
-                if ((int)currentSpeedState+1 < System.Enum.GetValues(typeof(SpeedState)).Length)
+                if ((int)currentSpeedState + 1 < System.Enum.GetValues(typeof(SpeedState)).Length)
                 {
                     currentSpeedState = (SpeedState)(((int)currentSpeedState + 1) % System.Enum.GetValues(typeof(SpeedState)).Length);
-                    nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                    nextSpeedChangeTime = currentTime + speedChangeCooldown;
                     bellAudioSource.Play();
                 }
             }
             else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
-                if ((int)currentSpeedState-1 >= 0) {
+                if ((int)currentSpeedState - 1 >= 0)
+                {
                     currentSpeedState = (SpeedState)(((int)currentSpeedState - 1 + System.Enum.GetValues(typeof(SpeedState)).Length) % System.Enum.GetValues(typeof(SpeedState)).Length);
-                    nextSpeedChangeTime = currentTime + speedChangeCooldown; // Set the next allowed time
+                    nextSpeedChangeTime = currentTime + speedChangeCooldown;
                     bellAudioSource.Play();
                 }
             }
-            /*
-            else
-            {
-                // Gradually slow down when not accelerating
-                currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, 0f, Time.deltaTime * decelerationRate);
-            }
-            */
         }
 
         switch (currentSpeedState)
         {
             case SpeedState.Reverse:
-                targetForwardSpeed = -1*maxReverseSpeed;
+                targetForwardSpeed = -1 * maxReverseSpeed;
                 break;
             case SpeedState.Stop:
                 targetForwardSpeed = 0f;
@@ -147,18 +131,15 @@ public class ShipController : MonoBehaviour
                 break;
         }
 
-       // Exponential growth towards the target speed
-    float k = 0.1f; // Controls the steepness of the exponential curve
-    if (currentForwardSpeed > targetForwardSpeed) {
-        k = 0.5f;
-    }
-    currentForwardSpeed += (targetForwardSpeed - currentForwardSpeed) * (1 - Mathf.Exp(-k * Time.deltaTime));
+        float k = 0.1f;
+        if (currentForwardSpeed > targetForwardSpeed)
+        {
+            k = 0.5f;
+        }
+        currentForwardSpeed += (targetForwardSpeed - currentForwardSpeed) * (1 - Mathf.Exp(-k * Time.deltaTime));
 
-        // Prevent overshooting the target speed
         currentForwardSpeed = Mathf.Clamp(currentForwardSpeed, -maxReverseSpeed, maxForwardSpeed);
-        //Debug.Log(currentSpeedState + " | " + currentForwardSpeed);
 
-        // Turning
         float turnInput = 0f;
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
@@ -169,23 +150,16 @@ public class ShipController : MonoBehaviour
             turnInput = 1f;
         }
 
-        if (turnInput != 0f && gameOverController != null &&  gameOverController.gameOver == false)
+        if (turnInput != 0f && gameOverController != null && !gameOverController.gameOver)
         {
-            // Scale turn speed by current velocity magnitude
             float currentSpeed = rb.linearVelocity.magnitude;
             float turnSpeed = Mathf.Lerp(0, maxTurnSpeed, currentSpeed / maxForwardSpeed);
 
-            // Calculate the offset position behind the ship for turning
-            Vector3 offsetPosition = transform.position - transform.forward * 2f; // Offset behind the ship
-
-            // Calculate the force direction in the horizontal plane only
+            Vector3 offsetPosition = transform.position - transform.forward * 2f;
             Vector3 turnForce = -1 * transform.right * turnInput * turnSpeed;
             turnForce.y = 0;
-
-            // Project offset position onto the horizontal plane to avoid vertical rotation
             offsetPosition.y = transform.position.y;
 
-            // Apply the turning force at the offset position
             rb.AddForceAtPosition(turnForce, offsetPosition, ForceMode.Force);
             rb.AddForce(transform.forward * (currentForwardSpeed * 0.8f), ForceMode.Acceleration);
         }
@@ -194,76 +168,45 @@ public class ShipController : MonoBehaviour
             rb.AddForce(transform.forward * currentForwardSpeed, ForceMode.Acceleration);
         }
 
-        // Adjust banking angle
-        float targetBank = turnInput * -bankAngle; // Negative to bank into the turn
-        currentBank = Mathf.Lerp(currentBank, targetBank, Time.deltaTime * bankSpeed);
+        float targetBank = turnInput * -bankAngle;
+        currentBank = Mathf.Lerp(currentBank, targetBank, bankSpeed * Time.deltaTime);
 
-        // Apply banking visually (rotation around local z-axis)
         Vector3 localEulerAngles = transform.localEulerAngles;
-        localEulerAngles.z = currentBank; // Bank rotation remains here
+        localEulerAngles.z = currentBank;
         transform.localEulerAngles = localEulerAngles;
     }
 
     private void FixedUpdate()
     {
-        // Clamp velocity to prevent excessive speed
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxForwardSpeed);
     }
 
-
     private void ApplyRockingEffect()
     {
-        // Apply the rocking effect to the ship's roll (z-axis) without affecting the banking
-        var time = Time.time;
-        float rockingRoll = Mathf.Sin(time * rockingSpeed + offset) * rockingStrength;
-        float rockingPitch = Mathf.Cos(time * rockingSpeed * .8f + 11f + offset) * rockingStrength;
+        float rockingRoll = Mathf.Sin(Time.time * rockingSpeed + offset) * rockingStrength;
+        float rockingPitch = Mathf.Cos(Time.time * rockingSpeed * 0.8f + 11f + offset) * rockingStrength;
 
-        // Store the current rotation, and apply the rocking only to the z-axis (roll)
         Vector3 currentRotation = transform.localEulerAngles;
         currentRotation.z += rockingRoll;
-        currentRotation.x += rockingRoll;
+        currentRotation.x += rockingPitch;
 
-        // Apply the new rotation
         transform.localEulerAngles = currentRotation;
     }
 
     private void AdjustParticleSpeed()
     {
-        // Get the main modules of the particle systems
         var main1 = sternWake.main;
         var main2 = bowWake.main;
 
-        // Adjust the start speed based on the current forward speed of the ship
         main1.startSpeed = maxSternWakeSpeed * currentForwardSpeed / maxForwardSpeed;
-        if (currentForwardSpeed > 1) {
-            main2.startSpeed = Mathf.Max(0.3f * maxBowWakeSpeed, maxBowWakeSpeed * currentForwardSpeed / maxForwardSpeed);
-        }
-        else {
-            main2.startSpeed = 0;
-        }
-
-        // Swap positions if moving backward
-        /*
-        if (currentForwardSpeed < 0)
-        {
-            sternWake.transform.localPosition = new Vector3(0, 0, bowWake.transform.localPosition.z);
-            bowWake.transform.localPosition = new Vector3(0, 0, sternWake.transform.localPosition.z);
-        }
-        else
-        {
-            // Reset to default positions if moving forward
-            sternWake.transform.localPosition = new Vector3(0, 0, -5f); // Example position for stern wake
-            bowWake.transform.localPosition = new Vector3(0, 0, 5f);  // Example position for bow wake
-        }
-        */
+        main2.startSpeed = currentForwardSpeed > 1 ? Mathf.Max(0.3f * maxBowWakeSpeed, maxBowWakeSpeed * currentForwardSpeed / maxForwardSpeed) : 0;
     }
 
     private void AdjustAudioVolume()
     {
-    if (shipAudioSource != null)
-    {
-        // Adjust the volume based on the current forward speed
-        shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, currentForwardSpeed / maxForwardSpeed);
-    }
+        if (shipAudioSource != null)
+        {
+            shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, currentForwardSpeed / maxForwardSpeed);
+        }
     }
 }
