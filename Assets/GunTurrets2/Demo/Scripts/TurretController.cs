@@ -45,76 +45,70 @@ namespace GT2.Demo
                 StopFiringSound();
                 return;
             }
-            else {
+            else
+            {
                 TurretAim.destroyed = false;
             }
-            if (TurretAim == null || Bullet == null) {
+
+            if (TurretAim == null || Bullet == null || bulletPool == null || soundController == null)
                 return;
-            }
-            if (bulletPool == null){
-                Debug.LogError(name + ": TurretController not assigned a BulletPool!");
-                return;
-            }
-            if (soundController == null) {
-                Debug.LogError(name + ": TurretController not assigned a SoundController!");
-                soundController = GetComponent<SoundController>();
-            }
-            /*
-            if (Input.GetMouseButtonDown(0)) {
-                TurretAim.IsIdle = !TurretAim.IsIdle;
-            }
-            */
-            if (TurretAim.IsIdle) {
+
+            if (TurretAim.IsIdle)
+            {
                 StopFiringSound();
                 return;
             }
+
             float distance = FindTarget();
-            if (targetPoint != null) {
+            if (targetPoint != null)
+            {
                 Vector3 predictedPosition = PredictTargetPosition();
                 Vector3 randomOffset = Vector3.zero;
                 Quaternion randomRotation = Quaternion.identity;
-                if (distance < 50) {
+
+                if (distance < 50)
+                {
                     randomRotation = Quaternion.Euler(
-                        Random.Range(-dispersion, dispersion), 
-                        Random.Range(-dispersion, dispersion), 
+                        Random.Range(-dispersion, dispersion),
+                        Random.Range(-dispersion, dispersion),
                         Random.Range(-dispersion, dispersion));
                 }
-                else {
+                else
+                {
                     randomOffset = new Vector3(
                         Random.Range(-dispersion, dispersion),
                         Random.Range(-dispersion, dispersion),
-                        Random.Range(-dispersion, dispersion)
-                    );
+                        Random.Range(-dispersion, dispersion));
                 }
                 predictedPosition += randomOffset;
 
-                // Apply dispersion to the turret's aiming direction
                 Vector3 aimDirection = predictedPosition - TurretAim.transform.position;
                 aimDirection = randomRotation * aimDirection;
-
                 TurretAim.AimPosition = TurretAim.transform.position + aimDirection;
 
                 if (TurretAim.IsAimed)
                 {
-                    // Attempt to shoot at the target
                     fireCooldown -= Time.deltaTime;
-                    if (fireCooldown <= 0f)
+
+                    // Fire as many shots as needed for the accumulated cooldown
+                    while (fireCooldown <= 0f)
                     {
                         Shoot();
-                        fireCooldown = 1f / fireRate; // Reset cooldown
-                        // Play the firing sound while actively shooting
+                        fireCooldown += 1f / fireRate; // Accumulate for the next shot
+
                         if (!isShooting)
                         {
                             StartFiringSound();
                         }
                     }
                 }
-                else{
+                else
+                {
                     StopFiringSound();
                 }
             }
-            else {
-                // Reset aim position
+            else
+            {
                 TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
                 StopFiringSound();
                 fireCooldown = 1f / fireRate;
