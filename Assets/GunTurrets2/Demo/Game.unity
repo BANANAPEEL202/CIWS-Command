@@ -18032,7 +18032,7 @@ MonoBehaviour:
   radarBackground: {fileID: 1975613679}
   playerCamera: {fileID: 1158324790}
   detectionRange: 2000
-  beamAngle: 2
+  beamAngle: 6
   rotationSpeed: -330
   radarBlipPrefab: {fileID: 7759445574736798209, guid: 7fcacda0f8eec4f07b0e334d96c3ad16,
     type: 3}

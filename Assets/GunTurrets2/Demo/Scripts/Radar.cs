@@ -10,7 +10,7 @@ public class Radar : MonoBehaviour
     public Transform radarBackground; // The radar's base transform
     public Transform playerCamera;
     public float detectionRange = 1500f; // Maximum range of radar detection
-    public float beamAngle = 2f; // Beam angle in degrees
+    public float beamAngle = 5f; // Beam angle in degrees
     public float rotationSpeed = -400; // Rotation speed in degrees per second
     private float radarRadius;
 
