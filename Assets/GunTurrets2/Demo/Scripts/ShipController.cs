@@ -213,7 +213,9 @@ public class ShipController : MonoBehaviour
     {
         if (shipAudioSource != null)
         {
-            shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, currentForwardSpeed / maxForwardSpeed);
+            float ratio = maxForwardSpeed != 0 ? Mathf.Clamp01(currentForwardSpeed / maxForwardSpeed) : 0;
+            shipAudioSource.volume = Mathf.Lerp(0.05f, maxVolume, ratio);
+
         }
     }
 }
