@@ -7,7 +7,7 @@ Built in **Unity 6**.
 
 ## Controls
 
-Use WASD or arrow keys to control the ship. Beware that radars can destroy your radar and CIWS systems and 3 missiles will take your ship out. 
+Use WASD or arrow keys to control the ship. Beware that missiles can destroy your radar and CIWS systems and 3 missiles will take your ship out. 
 
 
 # Change log
@@ -15,3 +15,9 @@ Use WASD or arrow keys to control the ship. Beware that radars can destroy your 
 ### 1.0 (Jan 5 2024)
 
 - Released
+
+# Known Issues and Future Suggestions
+- Fix bullet tracer (trail renderer) bug
+- Add a reload gameplay mechanic for CIWS
+- Add a repair gameplay mechanic for CIWS/radar
+- Update Arleigh Burke ship model
