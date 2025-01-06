@@ -1,5 +1,5 @@
 # CIWS Command
-Command an Arleigh Burke class destroyer and survive against waves of incoming missiles using your 2 Phalanx CIWS systems. Play in the browser [here]([https://bananapeel202.github.io/CIWS-Command/])
+Command an Arleigh Burke class destroyer and survive against waves of incoming missiles using your 2 Phalanx CIWS systems. Play in the browser [here](https://bananapeel202.github.io/CIWS-Command/)
 
 <img width="857" alt="Screenshot 2025-01-05 at 6 47 56 PM" src="https://github.com/user-attachments/assets/fe13a266-d271-4d35-99fe-007294f67f1b" />
 
