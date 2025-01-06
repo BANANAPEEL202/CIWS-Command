@@ -6598,6 +6598,11 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 6837649673513241633, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
         type: 3}
       propertyPath: Target
@@ -27192,6 +27197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Volume
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837649673513241633, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7069817274223318715, guid: 2c6063ab46c0744e6a6546a0ac0d077f,
         type: 3}
