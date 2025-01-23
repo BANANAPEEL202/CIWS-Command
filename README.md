@@ -18,6 +18,8 @@ Use WASD or arrow keys to control the ship. Beware that missiles can destroy you
 
 # Known Issues and Future Suggestions
 - Fix bullet tracer (trail renderer) bug
+- Fix bug where CIWS can fire while not being aimed at target
+- Randomize missile spawn direction
 - Add a reload gameplay mechanic for CIWS
 - Add a repair gameplay mechanic for CIWS/radar
 - Update Arleigh Burke ship model
