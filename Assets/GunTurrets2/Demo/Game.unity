@@ -18711,7 +18711,7 @@ MonoBehaviour:
   maxVerticalAngle: -20
   minDistance: 10
   maxDistance: 150
-  offset: {x: 0, y: 15, z: 5}
+  offset: {x: 0, y: 11, z: 5}
   currentHorizontalAngle: 0
   currentVerticalAngle: -80
 --- !u!114 &1158324795
