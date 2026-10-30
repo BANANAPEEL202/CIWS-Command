@@ -72,7 +72,19 @@ namespace GT2
         /// True when the turret is aimed at the given <see cref="AimPosition"/>. When the turret
         /// is idle, this is never true.
         /// </summary>
-        public bool IsAimed { get { return isAimed; } }
+        public bool IsAimed { get { return IsAimedAt(AimPosition); } }
+
+        // Optional physical muzzle for mounts whose barrel pivot is offset from the bore.
+        public Transform AimOrigin { get; set; }
+
+        // Evaluate the current transforms, not a flag calculated for last frame's target.
+        public bool IsAimedAt(Vector3 targetPosition)
+        {
+            if (IsIdle || destroyed || turretBase == null) return false;
+            Transform muzzleAxis = AimOrigin != null ? AimOrigin : barrels != null ? barrels : turretBase;
+            if ((targetPosition - muzzleAxis.position).sqrMagnitude < 0.0001f) return false;
+            return GetTurretAngleToTarget(targetPosition) < aimedThreshold;
+        }
 
         /// <summary>
         /// Angle in degress to the given <see cref="AimPosition"/>. When the turret is idle,
@@ -122,7 +134,11 @@ namespace GT2
         {
             float angle = 999f;
 
-            if (hasBarrels)
+            if (AimOrigin != null)
+            {
+                angle = Vector3.Angle(targetPosition - AimOrigin.position, AimOrigin.forward);
+            }
+            else if (barrels != null)
             {
                 angle = Vector3.Angle(targetPosition - barrels.position, barrels.forward);
             }
@@ -133,7 +149,7 @@ namespace GT2
                     turretBase.up);
 
                 angle = Vector3.Angle(
-                    flattenedTarget - turretBase.position,
+                    flattenedTarget,
                     turretBase.forward);
             }
 
@@ -149,10 +165,8 @@ namespace GT2
                     limitedTraverseAngle, 0f,
                     TraverseSpeed * Time.deltaTime);
 
-                if (Mathf.Abs(limitedTraverseAngle) > Mathf.Epsilon)
-                    turretBase.localEulerAngles = Vector3.up * limitedTraverseAngle;
-                else
-                    isBaseAtRest = true;
+                turretBase.localEulerAngles = Vector3.up * limitedTraverseAngle;
+                isBaseAtRest = Mathf.Abs(limitedTraverseAngle) <= Mathf.Epsilon;
             }
             else
             {
@@ -167,10 +181,8 @@ namespace GT2
             if (hasBarrels)
             {
                 elevation = Mathf.MoveTowards(elevation, 0f, ElevationSpeed * Time.deltaTime);
-                if (Mathf.Abs(elevation) > Mathf.Epsilon)
-                    barrels.localEulerAngles = Vector3.right * -elevation;
-                else
-                    isBarrelAtRest = true;
+                barrels.localEulerAngles = Vector3.right * -elevation;
+                isBarrelAtRest = Mathf.Abs(elevation) <= Mathf.Epsilon;
             }
             else // Barrels automatically at rest if there are no barrels.
                 isBarrelAtRest = true;
@@ -178,7 +190,8 @@ namespace GT2
 
         private void RotateBarrelsToFaceTarget(Vector3 targetPosition)
         {
-            Vector3 localTargetPos = turretBase.InverseTransformDirection(targetPosition - barrels.position);
+            Vector3 origin = AimOrigin != null ? AimOrigin.position : barrels.position;
+            Vector3 localTargetPos = turretBase.InverseTransformDirection(targetPosition - origin);
             Vector3 flattenedVecForBarrels = Vector3.ProjectOnPlane(localTargetPos, Vector3.up);
 
             float targetElevation = Vector3.Angle(flattenedVecForBarrels, localTargetPos);
@@ -187,8 +200,7 @@ namespace GT2
             targetElevation = Mathf.Clamp(targetElevation, -MaxDepression, MaxElevation);
             elevation = Mathf.MoveTowards(elevation, targetElevation, ElevationSpeed * Time.deltaTime);
 
-            if (Mathf.Abs(elevation) > Mathf.Epsilon)
-                barrels.localEulerAngles = Vector3.right * -elevation;
+            barrels.localEulerAngles = Vector3.right * -elevation;
 
 #if UNITY_EDITOR
             if (DrawDebugRay)
@@ -200,7 +212,8 @@ namespace GT2
         {
             Vector3 turretUp = transform.up;
 
-            Vector3 vecToTarget = targetPosition - turretBase.position;
+            Vector3 origin = AimOrigin != null ? AimOrigin.position : turretBase.position;
+            Vector3 vecToTarget = targetPosition - origin;
             Vector3 flattenedVecForBase = Vector3.ProjectOnPlane(vecToTarget, turretUp);
 
             if (hasLimitedTraverse)
@@ -214,8 +227,7 @@ namespace GT2
                     targetTraverse,
                     TraverseSpeed * Time.deltaTime);
 
-                if (Mathf.Abs(limitedTraverseAngle) > Mathf.Epsilon)
-                    turretBase.localEulerAngles = Vector3.up * limitedTraverseAngle;
+                turretBase.localEulerAngles = Vector3.up * limitedTraverseAngle;
             }
             else
             {
