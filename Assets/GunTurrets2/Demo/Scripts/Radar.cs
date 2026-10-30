@@ -27,14 +27,16 @@ public class Radar : MonoBehaviour
 
     void Update()
     {
-        if (target.isAlive == false)
+        bool online = target != null && target.isAlive;
+        radarBeam.gameObject.SetActive(online);
+        radarBlips.gameObject.SetActive(online);
+        cameraPOV.gameObject.SetActive(online);
+        if (!online)
         {
-            radarBeam.gameObject.SetActive(false);
-            radarBlips.gameObject.SetActive(false);
-        }
-        else {
-            radarBeam.gameObject.SetActive(true);
-            radarBlips.gameObject.SetActive(true);
+            if (radarAudioSource != null) radarAudioSource.Stop();
+            StopAllCoroutines();
+            foreach (Transform blip in radarBlips) Destroy(blip.gameObject);
+            return;
         }
         radarRadius = radarBackground.GetComponent<RectTransform>().rect.width / 2f - 5;
 

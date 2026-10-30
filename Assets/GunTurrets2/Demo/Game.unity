@@ -26275,6 +26275,7 @@ GameObject:
   - component: {fileID: 2025717779}
   - component: {fileID: 2025717780}
   - component: {fileID: 2025717781}
+  - component: {fileID: 2025717782}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -26309,6 +26310,7 @@ Transform:
   - {fileID: 12662342}
   - {fileID: 748094498}
   - {fileID: 1003272315}
+  - {fileID: 2100000002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2025717777
@@ -27350,6 +27352,69 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   shipShader: {fileID: 4800000, guid: 85874d754aa744f1fbcd1c510d3ea8d6, type: 3}
   hull: {fileID: 414402701}
+--- !u!1 &2100000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000002}
+  - component: {fileID: 2100000003}
+  m_Layer: 0
+  m_Name: Target Engines
+  m_TagString: Target
+  m_IsActive: 1
+--- !u!4 &2100000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.32, z: -2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2025717775}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc722b4a92ce442c0b27d71bfa9db752, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  isAlive: 1
+  fireEffect: {fileID: 0}
+  explosionPrefab: {fileID: 5575785100120473701, guid: 79dddff6c9c7840309bfa1df5c259378,
+    type: 3}
+  fireAudioSource: {fileID: 1003272316}
+  targetName: Engines
+--- !u!114 &2025717782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025717774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace8832da6df4713970c567981f7e3ad, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  modules:
+  - {fileID: 1079891039}
+  - {fileID: 1707593774}
+  - {fileID: 2100000003}
+  - {fileID: 251834260}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
