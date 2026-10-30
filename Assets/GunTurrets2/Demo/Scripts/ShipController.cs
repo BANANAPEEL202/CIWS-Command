@@ -20,6 +20,10 @@ public class ShipController : MonoBehaviour
     private float targetForwardSpeed = 0f; // Target speed based on state
     private float currentBank = 0f;
     private Rigidbody rb;
+    private ShipModules modules;
+    public bool EnginesOperational => modules == null || modules.IsOperational(ShipModules.Engines);
+
+    private void Awake() { modules = GetComponent<ShipModules>(); }
 
     // Rocking effect variables
     private float offset = 0f;
@@ -96,8 +100,12 @@ public class ShipController : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
+        // Losing the engines rings the telegraph to Stop: the ship coasts down and keeps its rudder, but cannot change throttle.
+        bool engines = EnginesOperational;
+        if (!engines) currentSpeedState = SpeedState.Stop;
+
         float currentTime = Time.time;
-        if (currentTime >= nextSpeedChangeTime && gameOverController != null && !gameOverController.gameOver)
+        if (engines && currentTime >= nextSpeedChangeTime && gameOverController != null && !gameOverController.gameOver)
         {
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
@@ -194,8 +202,9 @@ public class ShipController : MonoBehaviour
         float rockingPitch = Mathf.Cos(Time.time * rockingSpeed * 0.8f + 11f + offset) * rockingStrength;
 
         Vector3 currentRotation = transform.localEulerAngles;
-        currentRotation.z += rockingRoll;
-        currentRotation.x += rockingPitch;
+        // Assign absolute wave offsets: an offline engine must not accumulate roll each frame.
+        currentRotation.z = currentBank + rockingRoll;
+        currentRotation.x = rockingPitch;
 
         transform.localEulerAngles = currentRotation;
     }
