@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,82 +5,85 @@ public class BulletPool : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject ship = null;
-    [SerializeField] private int poolSize = 10; // Size of the pool
-    [SerializeField] private float despawnDistance = 500f; // Max distance before despawning
+    [SerializeField] private int poolSize = 10;
+    [SerializeField] private float despawnDistance = 500f;
 
     private Queue<GameObject> pool;
-    private List<GameObject> activeBullets; // List to track active bullets
+    private List<GameObject> activeBullets;
 
     private void Awake()
     {
         pool = new Queue<GameObject>();
         activeBullets = new List<GameObject>();
-
-        // Pre-fill the pool with bullet objects
         for (int i = 0; i < poolSize; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab);
-            bullet.SetActive(false); // Initially, all bullets are inactive
+            ClearTrail(bullet);
+            bullet.SetActive(false);
             pool.Enqueue(bullet);
         }
     }
 
     private void Update()
     {
-        // Periodically check for bullets that are too far from the origin
         for (int i = activeBullets.Count - 1; i >= 0; i--)
         {
             GameObject bullet = activeBullets[i];
-            if (bullet.activeSelf && Vector3.Distance(bullet.transform.position, ship.transform.position) > despawnDistance)
-            {
+            if (bullet.activeSelf && ship != null &&
+                Vector3.Distance(bullet.transform.position, ship.transform.position) > despawnDistance)
                 ReturnBullet(bullet);
-            }
         }
     }
 
-    // Get a bullet from the pool
-    public GameObject GetBullet()
+    public GameObject GetBullet(Vector3 position, Quaternion rotation)
     {
-        if (pool == null)
-        {
-            Debug.LogError("Bullet pool not initialized!");
-            return null;
-        }
-        if (pool.Count > 0)
-        {
-            GameObject bullet = pool.Dequeue();
-            if (bullet.activeSelf)
-            {
-                Debug.LogWarning("Bullet is already active! Consider increasing the pool size.");
-                return null;
-            }
-            bullet.SetActive(true); // Activate the bullet when it's taken from the pool
-            activeBullets.Add(bullet); // Add the bullet to the active list
-            return bullet;
-        }
+        if (pool == null || pool.Count == 0) return null;
+        GameObject bullet = pool.Dequeue();
+        ClearTrail(bullet);
 
-        Debug.LogWarning("Bullet pool is empty! Consider increasing the pool size.");
-        return null;
-    }
-
-    // Return a bullet to the pool
-    public void ReturnBullet(GameObject bullet)
-    {
-        bullet.SetActive(false); // Deactivate the bullet before returning it to the pool
-        activeBullets.Remove(bullet); // Remove the bullet from the active list
-        bullet.transform.rotation = Quaternion.identity; // Reset rotation
-
-        // Optional: Reset position
-        bullet.transform.position = Vector3.zero; // Or set to a specific position if needed
-
+        // Teleport while inactive, before OnEnable or the trail renderer can sample a position.
+        bullet.transform.SetPositionAndRotation(position, rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector3.zero;  // Reset velocity to zero
-            rb.angularVelocity = Vector3.zero; // Reset angular velocity
-            rb.Sleep(); // Optional: Put Rigidbody to sleep
+            rb.position = position;
+            rb.rotation = rotation;
         }
+        activeBullets.Add(bullet);
+        bullet.SetActive(true);
+        TrailRenderer trail = bullet.GetComponent<TrailRenderer>();
+        if (trail != null)
+        {
+            trail.enabled = true;
+            trail.Clear();
+            trail.AddPosition(position);
+            trail.emitting = true;
+        }
+        return bullet;
+    }
 
-        pool.Enqueue(bullet); // Return the bullet to the pool
+    public void ReturnBullet(GameObject bullet)
+    {
+        // Multiple colliders can report the same hit; a projectile enters the queue only once.
+        if (bullet == null || !activeBullets.Remove(bullet)) return;
+        ClearTrail(bullet);
+        bullet.SetActive(false);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.Sleep();
+        }
+        pool.Enqueue(bullet);
+    }
+
+    private static void ClearTrail(GameObject bullet)
+    {
+        TrailRenderer trail = bullet.GetComponent<TrailRenderer>();
+        if (trail == null) return;
+        trail.emitting = false;
+        trail.Clear();
+        trail.enabled = false;
     }
 }
