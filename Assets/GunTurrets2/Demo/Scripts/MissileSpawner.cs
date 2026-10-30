@@ -8,6 +8,9 @@ public class MissileSpawner : MonoBehaviour
 
     // Range for random position variation
     public float spawnRadius = 5f;
+    // How far from the ship each wave appears; the bearing is re-rolled every wave
+    public float spawnDistance = 1500f;
+    private Vector3 waveDirection = Vector3.right;
 
     // Wave configuration
     public float initialDelay = 5f;  // First wave delay in seconds
@@ -29,7 +32,7 @@ public class MissileSpawner : MonoBehaviour
     void Update()
     {
         // Update the spawner's position relative to the ship
-        transform.position = ship.transform.position + new Vector3(1500, 0, 0);
+        transform.position = ship.transform.position + waveDirection * spawnDistance;
 
         // Allow manual missile spawning by pressing Space
         /*
@@ -47,6 +50,10 @@ public class MissileSpawner : MonoBehaviour
 
         while (true)
         {
+            // Each wave attacks from a new random bearing
+            waveDirection = Quaternion.Euler(0, Random.Range(0f, 360f), 0) * Vector3.right;
+            transform.position = ship.transform.position + waveDirection * spawnDistance;
+
             // Determine the number of missiles in the wave
             int missilesInWave = Random.Range(minMissilesPerWave, maxMissilesPerWave + 1);
 
