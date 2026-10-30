@@ -33,7 +33,26 @@
 		// Control the distance that surfaces below the water will contribute
 		// to foam being rendered.
 		_FoamMaxDistance("Foam Maximum Distance", Float) = 0.4
-		_FoamMinDistance("Foam Minimum Distance", Float) = 0.04		
+		_FoamMinDistance("Foam Minimum Distance", Float) = 0.04
+
+		// Faint secondary rim around each whitecap, giving the foam some depth.
+		_FoamHalo("Foam Halo Width", Range(0, 0.2)) = 0.06
+		_FoamHaloAlpha("Foam Halo Opacity", Range(0, 1)) = 0.2
+
+		// Broad, slow patches of slightly darker water that break up the flat blue.
+		_SwellSize("Swell Size (world units)", Float) = 160
+		_SwellCutoff("Swell Cutoff", Range(0, 1)) = 0.55
+		_SwellStrength("Swell Contrast", Range(0, 0.3)) = 0.12
+
+		// Faint light ripples drifting against the foam, so open water never reads as one flat colour.
+		_RippleColor("Ripple Color", Color) = (0.5, 0.86, 0.95, 0.3)
+		_RippleSize("Ripple Size (world units)", Float) = 14
+		_RippleCutoff("Ripple Cutoff", Range(0, 1)) = 0.72
+
+		// Water lightens toward the horizon before the scene fog takes over.
+		_HorizonTint("Horizon Tint", Color) = (0.76, 0.88, 0.94, 0.6)
+		_HorizonStart("Horizon Tint Start", Float) = 120
+		_HorizonEnd("Horizon Tint End", Float) = 1400
     }
     SubShader
     {
@@ -53,6 +72,7 @@
 
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
 
@@ -81,6 +101,8 @@
 				float2 distortUV : TEXCOORD1;
 				float4 screenPosition : TEXCOORD2;
 				float3 viewNormal : NORMAL;
+                UNITY_FOG_COORDS(3)
+				float3 worldPos : TEXCOORD4;
             };
 
 			sampler2D _SurfaceNoise;
@@ -98,6 +120,8 @@
 				o.distortUV = TRANSFORM_TEX(v.uv, _SurfaceDistortion);
 				o.noiseUV = TRANSFORM_TEX(v.uv, _SurfaceNoise);
 				o.viewNormal = COMPUTE_VIEW_NORMAL;
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                UNITY_TRANSFER_FOG(o, o.vertex);
 
                 return o;
             }
@@ -113,6 +137,18 @@
 			float _SurfaceDistortionAmount;
 
 			float2 _SurfaceNoiseScroll;
+
+			float _FoamHalo;
+			float _FoamHaloAlpha;
+			float _SwellSize;
+			float _SwellCutoff;
+			float _SwellStrength;
+			float4 _RippleColor;
+			float _RippleSize;
+			float _RippleCutoff;
+			float4 _HorizonTint;
+			float _HorizonStart;
+			float _HorizonEnd;
 
 			sampler2D _CameraDepthTexture;
 			sampler2D _CameraNormalsTexture;
@@ -160,11 +196,33 @@
 				// float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutoff ? 1 : 0;
 				float surfaceNoise = smoothstep(surfaceNoiseCutoff - SMOOTHSTEP_AA, surfaceNoiseCutoff + SMOOTHSTEP_AA, surfaceNoiseSample);
 
+				// Broad swell patches and a lighter horizon, still in flat toon steps.
+				// World-space patterns keep a fixed size however the ocean tiles are mapped.
+				float2 swellUV = i.worldPos.xz / _SwellSize + _Time.y * _SurfaceNoiseScroll * 0.35 + distortSample * 0.3;
+				float swellSample = tex2D(_SurfaceNoise, swellUV).r;
+				float swell = smoothstep(_SwellCutoff - 0.06, _SwellCutoff + 0.06, swellSample);
+				float lull = 1 - smoothstep(1 - _SwellCutoff - 0.06, 1 - _SwellCutoff + 0.06, swellSample);
+				waterColor.rgb *= 1 - swell * _SwellStrength + lull * _SwellStrength * 0.8;
+				float2 rippleUV = i.worldPos.xz / _RippleSize - _Time.y * _SurfaceNoiseScroll * 2 + distortSample * 0.5;
+				float ripple = smoothstep(_RippleCutoff - SMOOTHSTEP_AA, _RippleCutoff + SMOOTHSTEP_AA, tex2D(_SurfaceNoise, rippleUV).r);
+				float rippleFade = 1 - smoothstep(150, 700, i.screenPosition.w);
+				waterColor.rgb = lerp(waterColor.rgb, _RippleColor.rgb, ripple * _RippleColor.a * rippleFade);
+				float horizon = smoothstep(_HorizonStart, _HorizonEnd, i.screenPosition.w);
+				waterColor.rgb = lerp(waterColor.rgb, _HorizonTint.rgb, horizon * _HorizonTint.a);
+
 				float4 surfaceNoiseColor = _FoamColor;
-				surfaceNoiseColor.a *= surfaceNoise;
+				// Preserve close whitecaps; reduce distant subpixel sparkle.
+                float distantFoam = 1 - smoothstep(300, 1200, i.screenPosition.w);
+                surfaceNoiseColor.a *= surfaceNoise * distantFoam;
 
 				// Use normal alpha blending to combine the foam with the surface.
-				return alphaBlend(surfaceNoiseColor, waterColor);
+				float haloCutoff = surfaceNoiseCutoff - _FoamHalo;
+				float halo = smoothstep(haloCutoff - SMOOTHSTEP_AA, haloCutoff + SMOOTHSTEP_AA, surfaceNoiseSample) * (1 - surfaceNoise);
+				float4 haloColor = _FoamColor;
+				haloColor.a = halo * _FoamHaloAlpha * distantFoam;
+				float4 color = alphaBlend(surfaceNoiseColor, alphaBlend(haloColor, waterColor));
+                UNITY_APPLY_FOG(i.fogCoord, color);
+                return color;
             }
             ENDCG
         }
