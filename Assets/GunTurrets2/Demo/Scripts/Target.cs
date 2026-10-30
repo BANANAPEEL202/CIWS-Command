@@ -55,20 +55,24 @@ public class Target : MonoBehaviour
     // Method to simulate the target being killed (can be called from other scripts)
     public void KillTarget()
     {
-        if (isAlive) {
-            eventLog.AddLog(targetName + " destroyed", Color.red);
-        }
+        if (!isAlive) return;
         isAlive = false;
-        Instantiate(explosionPrefab, transform.position, transform.rotation);
-        if (!fireAudioSource.isPlaying)
-        {
-            fireAudioSource.Play();
-        }
+        if (eventLog == null) eventLog = FindFirstObjectByType<EventLog>();
+        eventLog?.AddLog(targetName + " offline", Color.red);
+        if (explosionPrefab != null) Instantiate(explosionPrefab, transform.position, transform.rotation);
+        ShowFireEffect();
+        if (fireAudioSource != null && !fireAudioSource.isPlaying) fireAudioSource.Play();
     }
 
-    // Method to reset the target to its alive state (optional)
     public void ResetTarget()
     {
         isAlive = true;
+        HideFireEffect();
+        if (fireAudioSource == null) return;
+        // Existing targets share the ship's fire loop: keep it for other damaged modules.
+        ShipController ship = GetComponentInParent<ShipController>();
+        foreach (Target other in ship != null ? ship.GetComponentsInChildren<Target>() : new[] { this })
+            if (!other.isAlive && other.fireAudioSource == fireAudioSource) return;
+        fireAudioSource.Stop();
     }
 }

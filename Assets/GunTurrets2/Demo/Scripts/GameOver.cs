@@ -22,7 +22,12 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver && target1.isAlive == false && target2.isAlive == false && target3.isAlive == false)
+        // With damage control, the ship is lost once all four modules are down, even mid-repair.
+        ShipModules modules = ship != null ? ship.GetComponent<ShipModules>() : null;
+        bool destroyed = modules != null
+            ? !modules.IsOperational(0) && !modules.IsOperational(1) && !modules.IsOperational(2) && !modules.IsOperational(3)
+            : !target1.isAlive && !target2.isAlive && !target3.isAlive;
+        if (!gameOver && destroyed)
         {
             gameOver = true;
             missileInterceptedText.text = "Missiles intercepted: " + (ship.GetComponent<ShipController>().missileCount-1);
