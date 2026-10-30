@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
+  m_Fog: 1
+  m_FogColor: {r: 0.76, g: 0.88, b: 0.94, a: 1}
+  m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogStart: 300
+  m_LinearFogEnd: 1800
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -5940,8 +5940,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.98, b: 0.95, a: 1}
+  m_Intensity: 1.05
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -5950,7 +5950,7 @@ Light:
     m_Type: 1
     m_Resolution: 3
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.7
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -24458,6 +24458,7 @@ GameObject:
   - component: {fileID: 2025717777}
   - component: {fileID: 2025717779}
   - component: {fileID: 2025717780}
+  - component: {fileID: 2025717781}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -25463,6 +25464,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c6063ab46c0744e6a6546a0ac0d077f, type: 3}
+--- !u!114 &2025717781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025717774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de96acc88ae64dfc97ef61206479fd52, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  shipShader: {fileID: 4800000, guid: 85874d754aa744f1fbcd1c510d3ea8d6, type: 3}
+  hull: {fileID: 414402701}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
