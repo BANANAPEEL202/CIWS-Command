@@ -27,6 +27,7 @@ namespace GT2.Demo
         private void Awake()
         {
             Application.targetFrameRate = 30;
+            if (TurretAim != null) TurretAim.AimOrigin = firePoint;
             if (TurretAim == null)
                 Debug.LogError(name + ": TurretController not assigned a TurretAim!");
             if (Bullet == null)
@@ -40,124 +41,105 @@ namespace GT2.Demo
 
         private void Update()
         {
-            if (Target.isAlive == false)
+            if (TurretAim == null || Bullet == null || bulletPool == null ||
+                soundController == null || firePoint == null || Target == null || fireRate <= 0)
             {
-                TurretAim.destroyed = true;
-                StopFiringSound();
-                return;
-            }
-            else
-            {
-                TurretAim.destroyed = false;
-            }
-
-            if (TurretAim == null || Bullet == null || bulletPool == null || soundController == null)
-                return;
-
-            if (TurretAim.IsIdle)
-            {
-                StopFiringSound();
+                ResetFiring();
                 return;
             }
 
-            float distance = FindTarget();
-            if (targetPoint != null)
+            TurretAim.destroyed = !Target.isAlive;
+            if (!Target.isAlive || TurretAim.IsIdle)
             {
-                Vector3 predictedPosition = PredictTargetPosition();
-                Vector3 randomOffset = Vector3.zero;
-                Quaternion randomRotation = Quaternion.identity;
-
-                if (distance < 50)
-                {
-                    randomRotation = Quaternion.Euler(
-                        Random.Range(-dispersion, dispersion),
-                        Random.Range(-dispersion, dispersion),
-                        Random.Range(-dispersion, dispersion));
-                }
-                else
-                {
-                    randomOffset = new Vector3(
-                        Random.Range(-dispersion, dispersion),
-                        Random.Range(-dispersion, dispersion),
-                        Random.Range(-dispersion, dispersion));
-                }
-                predictedPosition += randomOffset;
-
-                Vector3 aimDirection = predictedPosition - TurretAim.transform.position;
-                aimDirection = randomRotation * aimDirection;
-                TurretAim.AimPosition = TurretAim.transform.position + aimDirection;
-
-                if (TurretAim.IsAimed)
-                {
-                    fireCooldown -= Time.deltaTime;
-
-                    // Fire as many shots as needed for the accumulated cooldown
-                    while (fireCooldown <= 0f)
-                    {
-                        if (distance < 50)
-                        {
-                            randomRotation = Quaternion.Euler(
-                                Random.Range(-dispersion, dispersion),
-                                Random.Range(-dispersion, dispersion),
-                                Random.Range(-dispersion, dispersion));
-                        }
-                        else
-                        {
-                            randomOffset = new Vector3(
-                                Random.Range(-dispersion, dispersion),
-                                Random.Range(-dispersion, dispersion),
-                                Random.Range(-dispersion, dispersion));
-                        }
-                        predictedPosition += randomOffset;
-
-                        aimDirection = predictedPosition - TurretAim.transform.position;
-                        aimDirection = randomRotation * aimDirection;
-                        TurretAim.AimPosition = TurretAim.transform.position + aimDirection;
-                        Shoot();
-                        fireCooldown += 1f / fireRate; // Accumulate for the next shot
-
-                        if (!isShooting)
-                        {
-                            StartFiringSound();
-                        }
-                    }
-                }
-                else
-                {
-                    StopFiringSound();
-                }
+                ResetFiring();
+                return;
             }
-            else
+
+            Transform previousTarget = targetPoint;
+            FindTarget();
+            if (targetPoint != previousTarget) ResetFiring();
+
+            if (targetPoint == null)
             {
-                TurretAim.AimPosition = TurretAim.transform.position + TurretAim.transform.forward * 100f;
-                StopFiringSound();
-                fireCooldown = 1f / fireRate;
+                TurretAim.AimPosition = firePoint.position + transform.forward * 100f;
                 TurretAim.isAimed = false;
+                ResetFiring();
+                return;
+            }
+
+            // Tracking stays stable; dispersion belongs to the projectiles, not the aim target.
+            TurretAim.AimPosition = PredictTargetPosition();
+        }
+
+        private void OnDisable() { ResetFiring(); }
+
+        private void LateUpdate()
+        {
+            // Both aiming and targeting Updates have finished, regardless of script order.
+            if (!CanFire())
+            {
+                ResetFiring();
+                return;
+            }
+
+            fireCooldown -= Time.deltaTime;
+            while (fireCooldown <= 0f)
+            {
+                if (!Shoot()) break;
+                fireCooldown += 1f / fireRate;
+                if (!isShooting) StartFiringSound();
             }
         }
 
-        private void Shoot()
+        private bool CanFire()
         {
-            if (targetPoint == null || TurretAim.IsIdle)
-                return;
+            return Target != null && Target.isAlive && targetPoint != null &&
+                targetPoint.gameObject.activeInHierarchy && TurretAim != null &&
+                firePoint != null && Bullet != null && bulletPool != null &&
+                soundController != null && fireRate > 0 &&
+                TurretAim.IsAimedAt(TurretAim.AimPosition);
+        }
 
-            GameObject projectile = bulletPool.GetBullet();
-            if (projectile == null) {
-                return;
-            }
+        private void ResetFiring()
+        {
+            // Waiting for alignment must never accumulate a catch-up burst.
+            fireCooldown = fireRate > 0 ? 1f / fireRate : 0;
+            StopFiringSound();
+        }
 
-            // Set its position and velocity
-            projectile.transform.position = firePoint.position;
-            projectile.transform.rotation = firePoint.rotation;
+        private bool Shoot()
+        {
+            // Check again at the point of emission, including for a direct caller.
+            if (!CanFire()) return false;
 
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
+            Vector3 direction = firePoint.forward;
+            float distance = Vector3.Distance(firePoint.position, TurretAim.AimPosition);
+            if (distance < 50f)
             {
-                Vector3 direction = (TurretAim.AimPosition - firePoint.position).normalized;
-
-                // Set the velocity with no additional dispersion on the projectile direction
-                rb.linearVelocity = direction * projectileSpeed;
+                direction = Quaternion.Euler(
+                    Random.Range(-dispersion, dispersion),
+                    Random.Range(-dispersion, dispersion),
+                    Random.Range(-dispersion, dispersion)) * direction;
             }
+            else
+            {
+                direction = (direction * distance + new Vector3(
+                    Random.Range(-dispersion, dispersion),
+                    Random.Range(-dispersion, dispersion),
+                    Random.Range(-dispersion, dispersion))).normalized;
+            }
+
+            // Spawn along the actual barrel axis; never snap bullets toward an unaligned target.
+            GameObject projectile = bulletPool.GetBullet(firePoint.position,
+                Quaternion.LookRotation(direction, firePoint.up));
+            if (projectile == null)
+            {
+                ResetFiring();
+                return false;
+            }
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            if (rb != null) rb.linearVelocity = direction * projectileSpeed;
+            return true;
         }
 
         private float FindTarget()
@@ -177,7 +159,9 @@ namespace GT2.Demo
                 float angleToTarget = Vector3.SignedAngle(transform.forward, flattenedDirection, transform.up);
 
                 // Check if the target is within the traverse range
-                if (minimumEngagementRange < distance && distance < maxEngagementRange && distance < closestDistance && Mathf.Abs(angleToTarget) <= TurretAim.RightLimit && Mathf.Abs(angleToTarget) >= -TurretAim.LeftLimit)
+                if (minimumEngagementRange < distance && distance < maxEngagementRange &&
+                    distance < closestDistance && (!TurretAim.HasLimitedTraverse ||
+                    (angleToTarget >= -TurretAim.LeftLimit && angleToTarget <= TurretAim.RightLimit)))
                 {
                     closestDistance = distance;
                     closestTarget = missile.transform;
