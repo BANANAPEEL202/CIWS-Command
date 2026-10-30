@@ -35,3 +35,14 @@ sysinfo.txt
 # Ignore temporaries from GameCI
 /[Aa]rtifacts/
 /[Cc]odeCoverage/
+
+# Unity editor logs and per-user settings
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# OS and editor clutter
+.DS_Store
+.vscode/
+
+# Blender auto-backups
+*.blend1
